@@ -117,6 +117,7 @@ metadata/_edit_lock_ = true
 texture_filter = 1
 motion_mode = 1
 script = ExtResource("3_6f0q0")
+expected_meteor_speed = 0.05
 
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerBody"]
 z_index = 1
@@ -157,3 +158,4 @@ autostart = true
 [node name="AsteroidGroup" type="CanvasGroup" parent="."]
 
 [connection signal="timeout" from="PlayerBody/HoldDownTimer" to="PlayerBody" method="_orbit_spawn_after_timeout"]
+[connection signal="child_entered_tree" from="AsteroidGroup" to="PlayerBody" method="_on_asteroid_group_child_entered_tree"]
