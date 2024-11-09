@@ -13,7 +13,7 @@ bounce = 1.0
 size = Vector2(20, 1024)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjsxq"]
-size = Vector2(688, 20)
+size = Vector2(1024, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2jasm"]
 radius = 6.0
@@ -44,18 +44,22 @@ metadata/_edit_lock_ = true
 [node name="RightSide" type="CollisionShape2D" parent="CollisionsArea"]
 position = Vector2(1482, 540)
 shape = SubResource("RectangleShape2D_oxnbc")
+metadata/_edit_lock_ = true
 
 [node name="LeftSide" type="CollisionShape2D" parent="CollisionsArea"]
 position = Vector2(438, 540)
 shape = SubResource("RectangleShape2D_oxnbc")
+metadata/_edit_lock_ = true
 
 [node name="UpSide" type="CollisionShape2D" parent="CollisionsArea"]
-position = Vector2(640, 6)
+position = Vector2(960, 18)
 shape = SubResource("RectangleShape2D_gjsxq")
+metadata/_edit_lock_ = true
 
 [node name="DownSide" type="CollisionShape2D" parent="CollisionsArea"]
-position = Vector2(640, 714)
+position = Vector2(960, 1062)
 shape = SubResource("RectangleShape2D_gjsxq")
+metadata/_edit_lock_ = true
 
 [node name="PlayerBody" type="CharacterBody2D" parent="."]
 position = Vector2(668, 230)
@@ -70,5 +74,7 @@ flip_v = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody"]
 shape = SubResource("CircleShape2D_2jasm")
 
-[node name="RigidBody2D" parent="." instance=ExtResource("5_oyh6i")]
-position = Vector2(533, 67)
+[node name="AsteroidGroup" type="CanvasGroup" parent="."]
+
+[node name="Meteor" parent="AsteroidGroup" instance=ExtResource("5_oyh6i")]
+position = Vector2(1181, 383)
