@@ -16,6 +16,7 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
+		print("Collider velocity: ", collision_info.get_collider().name)
 		if not randf_range(0, 1) > 0.8: 
 			velocity = velocity.bounce(collision_info.get_normal())
 			#print("Boing")

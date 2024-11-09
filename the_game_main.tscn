@@ -94,30 +94,59 @@ physics_material_override = SubResource("PhysicsMaterial_x0cmf")
 metadata/_edit_lock_ = true
 
 [node name="RightSide" type="CollisionShape2D" parent="CollisionsArea"]
-position = Vector2(1477, 540)
+position = Vector2(1482, 540)
 shape = SubResource("RectangleShape2D_oxnbc")
 metadata/_edit_lock_ = true
 
 [node name="LeftSide" type="CollisionShape2D" parent="CollisionsArea"]
-position = Vector2(443, 540)
+position = Vector2(438, 540)
 shape = SubResource("RectangleShape2D_oxnbc")
 metadata/_edit_lock_ = true
 
 [node name="UpSide" type="CollisionShape2D" parent="CollisionsArea"]
-position = Vector2(960, 23)
+position = Vector2(960, 18)
 shape = SubResource("RectangleShape2D_gjsxq")
 metadata/_edit_lock_ = true
 
 [node name="DownSide" type="CollisionShape2D" parent="CollisionsArea"]
+position = Vector2(960, 1062)
+shape = SubResource("RectangleShape2D_gjsxq")
+metadata/_edit_lock_ = true
+
+[node name="PlayerCollisionOnly" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_x0cmf")
+metadata/_edit_lock_ = true
+
+[node name="RightSide" type="CollisionShape2D" parent="PlayerCollisionOnly"]
+position = Vector2(1477, 540)
+shape = SubResource("RectangleShape2D_oxnbc")
+metadata/_edit_lock_ = true
+
+[node name="LeftSide" type="CollisionShape2D" parent="PlayerCollisionOnly"]
+position = Vector2(443, 540)
+shape = SubResource("RectangleShape2D_oxnbc")
+metadata/_edit_lock_ = true
+
+[node name="UpSide" type="CollisionShape2D" parent="PlayerCollisionOnly"]
+position = Vector2(960, 23)
+shape = SubResource("RectangleShape2D_gjsxq")
+metadata/_edit_lock_ = true
+
+[node name="DownSide" type="CollisionShape2D" parent="PlayerCollisionOnly"]
 position = Vector2(960, 1057)
 shape = SubResource("RectangleShape2D_gjsxq")
 metadata/_edit_lock_ = true
 
 [node name="PlayerBody" type="CharacterBody2D" parent="."]
 texture_filter = 1
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("3_6f0q0")
 expected_meteor_speed = 0.09
+metadata/_edit_lock_ = true
 
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerBody"]
 z_index = 1
@@ -156,6 +185,7 @@ wait_time = 0.3
 autostart = true
 
 [node name="AsteroidGroup" type="CanvasGroup" parent="."]
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="PlayerBody/HoldDownTimer" to="PlayerBody" method="_orbit_spawn_after_timeout"]
 [connection signal="child_entered_tree" from="AsteroidGroup" to="PlayerBody" method="_on_asteroid_group_child_entered_tree"]

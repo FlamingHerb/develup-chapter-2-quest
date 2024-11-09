@@ -32,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	if not reloading:
 		var input_direction = Input.get_vector("player_left", "player_right", "player_up", "player_down")
 		velocity = input_direction.normalized() * SPEED
+		_shoot_item_loop()
 	else:
 		velocity = Vector2.ZERO
 	
@@ -42,7 +43,6 @@ func _physics_process(delta: float) -> void:
 		engine_fire_sprite.visible = false
 	#endregion Movement
 	
-	_shoot_item_loop()
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
