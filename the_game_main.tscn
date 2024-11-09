@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://7wu5ocmdusrj"]
+
+[ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/darkPurple.png" id="2_2nlbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxnbc"]
+size = Vector2(20, 688)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjsxq"]
+size = Vector2(688, 20)
+
+[node name="TheGameMain" type="Node"]
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="SpaceBackground" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(2.69, 2.69)
+texture = ExtResource("2_2nlbx")
+metadata/_edit_lock_ = true
+
+[node name="CollisionsArea" type="Area2D" parent="."]
+
+[node name="RightSide" type="CollisionShape2D" parent="CollisionsArea"]
+position = Vector2(994, 360)
+shape = SubResource("RectangleShape2D_oxnbc")
+
+[node name="LeftSide" type="CollisionShape2D" parent="CollisionsArea"]
+position = Vector2(286, 360)
+shape = SubResource("RectangleShape2D_oxnbc")
+
+[node name="UpSide" type="CollisionShape2D" parent="CollisionsArea"]
+position = Vector2(640, 6)
+shape = SubResource("RectangleShape2D_gjsxq")
+
+[node name="DownSide" type="CollisionShape2D" parent="CollisionsArea"]
+position = Vector2(640, 714)
+shape = SubResource("RectangleShape2D_gjsxq")
