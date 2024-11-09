@@ -152,7 +152,7 @@ scale = Vector2(1, 1.03846)
 curve = SubResource("Curve2D_m0dgu")
 
 [node name="HoldDownTimer" type="Timer" parent="PlayerBody"]
-wait_time = 0.5
+wait_time = 0.3
 autostart = true
 
 [node name="AsteroidGroup" type="CanvasGroup" parent="."]
