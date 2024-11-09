@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=15 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
-[ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/darkPurple.png" id="2_2nlbx"]
-[ext_resource type="Texture2D" uid="uid://bqysvymc37xjg" path="res://graphics/playerShip1_blue.png" id="2_wgf0d"]
+[ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
+[ext_resource type="Texture2D" uid="uid://bqysvymc37xjg" path="res://graphics/spaceship_parts/playerShip1_blue.png" id="2_wgf0d"]
 [ext_resource type="Script" path="res://scripts/player_body.gd" id="3_6f0q0"]
-[ext_resource type="PackedScene" uid="uid://matenki8c0ld" path="res://scenes/player_orbit_follower.tscn" id="5_026l2"]
+[ext_resource type="Texture2D" uid="uid://ciq23gpd0p816" path="res://graphics/spaceship_parts/fire02.png" id="6_n3ii6"]
+[ext_resource type="Texture2D" uid="uid://cmsk66txox132" path="res://graphics/spaceship_parts/fire03.png" id="7_tqw60"]
+[ext_resource type="Texture2D" uid="uid://chc1usc2wheit" path="res://graphics/spaceship_parts/fire06.png" id="10_18cmd"]
+[ext_resource type="Texture2D" uid="uid://c7ecsudvniv8c" path="res://graphics/spaceship_parts/fire07.png" id="11_5hf15"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
 bounce = 1.0
@@ -14,6 +17,26 @@ size = Vector2(20, 1024)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjsxq"]
 size = Vector2(1024, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vvj0e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_n3ii6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tqw60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_18cmd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5hf15")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2jasm"]
 radius = 6.0
@@ -68,13 +91,23 @@ shape = SubResource("RectangleShape2D_gjsxq")
 metadata/_edit_lock_ = true
 
 [node name="PlayerBody" type="CharacterBody2D" parent="."]
+texture_filter = 1
 motion_mode = 1
 script = ExtResource("3_6f0q0")
 
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerBody"]
+z_index = 1
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_wgf0d")
 flip_v = true
+
+[node name="EngineFire" type="AnimatedSprite2D" parent="PlayerBody/PlayerSprite"]
+z_as_relative = false
+position = Vector2(0, -50)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_vvj0e")
+autoplay = "default"
+frame_progress = 0.884154
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="PlayerBody"]
 shape = SubResource("CircleShape2D_2jasm")
@@ -84,7 +117,8 @@ position = Vector2(0, -0.5)
 scale = Vector2(1, 1.03846)
 curve = SubResource("Curve2D_m0dgu")
 
-[node name="OrbitFollower" parent="PlayerBody/PlayerOrbit" instance=ExtResource("5_026l2")]
-position = Vector2(0, -25)
+[node name="HoldDownTimer" type="Timer" parent="PlayerBody"]
 
 [node name="AsteroidGroup" type="CanvasGroup" parent="."]
+
+[connection signal="timeout" from="PlayerBody/HoldDownTimer" to="PlayerBody" method="_orbit_spawn_after_timeout"]

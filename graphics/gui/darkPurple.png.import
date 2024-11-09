@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqysvymc37xjg"
-path="res://.godot/imported/playerShip1_blue.png-13a42e0c865383dbde25e67518a250f0.ctex"
+uid="uid://1gledsyc1wv1"
+path="res://.godot/imported/darkPurple.png-0ae2ae2c13526b56ce5393e8f2f1bb7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/playerShip1_blue.png"
-dest_files=["res://.godot/imported/playerShip1_blue.png-13a42e0c865383dbde25e67518a250f0.ctex"]
+source_file="res://graphics/gui/darkPurple.png"
+dest_files=["res://.godot/imported/darkPurple.png-0ae2ae2c13526b56ce5393e8f2f1bb7a.ctex"]
 
 [params]
 
