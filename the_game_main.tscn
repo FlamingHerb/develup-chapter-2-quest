@@ -134,7 +134,7 @@ frame_progress = 0.680424
 
 [node name="ReloadAnim" type="AnimatedSprite2D" parent="PlayerBody"]
 visible = false
-modulate = Color(0.704341, 0.394433, 0.612808, 1)
+modulate = Color(0.705882, 0.396078, 0.611765, 1)
 position = Vector2(0.5, -0.5)
 scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_ynw8h")
@@ -151,6 +151,8 @@ scale = Vector2(1, 1.03846)
 curve = SubResource("Curve2D_m0dgu")
 
 [node name="HoldDownTimer" type="Timer" parent="PlayerBody"]
+wait_time = 0.5
+autostart = true
 
 [node name="AsteroidGroup" type="CanvasGroup" parent="."]
 
