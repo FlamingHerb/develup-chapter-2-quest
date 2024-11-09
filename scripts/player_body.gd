@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var player_sprite = $PlayerSprite
 
 const SPEED = 300.0
 const ROTATION_SPEED = 2
@@ -13,6 +14,6 @@ func _physics_process(delta: float) -> void:
 	velocity = input_direction.normalized() * SPEED
 	
 	if velocity != Vector2(0, 0):
-		rotation = velocity.angle() - (PI/2)
+		player_sprite.rotation = velocity.angle() - (PI/2)
 	
 	move_and_slide()
