@@ -17,7 +17,7 @@ var meteor_orbit_prefab = preload("res://scenes/player_orbit_follower.tscn")
 var actual_meteor_prefab = preload("res://scenes/meteor.tscn")
 var can_fire = true
 
-const SPEED = 300.0
+const SPEED = 200.0
 const ROTATION_SPEED = 2
 
 func _ready() -> void:
@@ -77,11 +77,14 @@ func _shoot_item_loop() -> void:
 		
 		# Get first available meteor.
 		var meteor_reference = player_orbit.get_child(0)						
+		
 		# Position new projectile to meteor reference
 		new_projectile.position = meteor_reference.get_global_position()		
-		
+		# Set reference for projectile to know where player is
+		new_projectile.player_reference = self
+		new_projectile.meteor_speed = expected_meteor_speed
 		# Prepare it to where it should be firing towards.
-		new_projectile.linear_velocity = (new_projectile.position - position) / expected_meteor_speed
+		new_projectile.velocity = (new_projectile.position - position) / expected_meteor_speed
 		
 		# Add new projectile
 		asteroid_group.add_child(new_projectile)
@@ -95,5 +98,6 @@ func _shoot_item_loop() -> void:
 		can_fire = true
 
 func _on_asteroid_group_child_entered_tree(node: Node) -> void:
+	print(asteroid_group.get_child_count())
 	if asteroid_group.get_child_count() == 64:
 		print("Bomb available.")
