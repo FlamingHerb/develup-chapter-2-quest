@@ -1,13 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=19 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
-[ext_resource type="Texture2D" uid="uid://bqysvymc37xjg" path="res://graphics/spaceship_parts/playerShip1_blue.png" id="2_wgf0d"]
+[ext_resource type="Texture2D" uid="uid://bqysvymc37xjg" path="res://graphics/spaceship_parts/playership1_blue.png" id="2_wgf0d"]
 [ext_resource type="Script" path="res://scripts/player_body.gd" id="3_6f0q0"]
 [ext_resource type="Texture2D" uid="uid://ciq23gpd0p816" path="res://graphics/spaceship_parts/fire02.png" id="6_n3ii6"]
 [ext_resource type="Texture2D" uid="uid://cmsk66txox132" path="res://graphics/spaceship_parts/fire03.png" id="7_tqw60"]
+[ext_resource type="Texture2D" uid="uid://og4op571jbrc" path="res://graphics/spaceship_parts/star1.png" id="9_gcr0f"]
 [ext_resource type="Texture2D" uid="uid://chc1usc2wheit" path="res://graphics/spaceship_parts/fire06.png" id="10_18cmd"]
+[ext_resource type="Texture2D" uid="uid://chcifsrigdk8n" path="res://graphics/spaceship_parts/star2.png" id="10_oiyhr"]
 [ext_resource type="Texture2D" uid="uid://c7ecsudvniv8c" path="res://graphics/spaceship_parts/fire07.png" id="11_5hf15"]
+[ext_resource type="Texture2D" uid="uid://mluchhfl31du" path="res://graphics/spaceship_parts/star3.png" id="11_vs6nw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
 bounce = 1.0
@@ -36,6 +39,26 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 20.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ynw8h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_gcr0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_oiyhr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vs6nw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_oiyhr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2jasm"]
@@ -107,7 +130,17 @@ position = Vector2(0, -50)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vvj0e")
 autoplay = "default"
-frame_progress = 0.884154
+frame_progress = 0.680424
+
+[node name="ReloadAnim" type="AnimatedSprite2D" parent="PlayerBody"]
+visible = false
+modulate = Color(0.704341, 0.394433, 0.612808, 1)
+position = Vector2(0.5, -0.5)
+scale = Vector2(1.25, 1.25)
+sprite_frames = SubResource("SpriteFrames_ynw8h")
+autoplay = "default"
+frame = 1
+frame_progress = 0.973377
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="PlayerBody"]
 shape = SubResource("CircleShape2D_2jasm")

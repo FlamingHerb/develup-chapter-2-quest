@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 @onready var player_sprite = $PlayerSprite
 @onready var engine_fire_sprite = $PlayerSprite/EngineFire
+@onready var reload_animation = $ReloadAnim
 @onready var hold_down_timer = $HoldDownTimer
 @onready var player_orbit = $PlayerOrbit
+
 
 var meteor_orbit_prefab = preload("res://scenes/player_orbit_follower.tscn")
 
@@ -34,15 +36,20 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("player_reload"):
 		hold_down_timer.paused = false
+		reload_animation.visible = true
 		print("Reloading")
 		
 	if Input.is_action_just_released("player_reload"):
 		hold_down_timer.paused = true
+		reload_animation.visible = false
 		print("Not anymore")
 
 func _orbit_spawn_after_timeout() -> void:
+	# If children are already 10, don't bother reload.
+	if player_orbit.get_child_count() > 9: return
+	
 	var new_meteor = meteor_orbit_prefab.instantiate()
 	
 	player_orbit.add_child(new_meteor)
 	
-	print("Spawning")
+	print("Spawning. Current Count: ", player_orbit.get_child_count())
