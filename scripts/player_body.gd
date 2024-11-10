@@ -92,8 +92,8 @@ func _shoot_item_loop() -> void:
 		
 		var new_projectile = actual_meteor_prefab.instantiate()
 		
-		# Get first available meteor.
-		var meteor_reference = player_orbit.get_child(0)						
+		# Get randomly available meteor.
+		var meteor_reference = player_orbit.get_child(randi() % player_orbit.get_child_count())						
 		
 		# Position new projectile to meteor reference
 		new_projectile.position = meteor_reference.get_global_position()		
@@ -130,10 +130,6 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	new_projectile.meteor_sprite = body_ref.meteor_sprite
 	# Prepare it to where it should be firing towards.
 	new_projectile.velocity = body_ref.velocity.rotated(randf_range(-1, 1) * 2)
-	
-	#new_projectile.velocity.rotated(randf_range(-1, 1) * 2)
-	
-	print(new_projectile.velocity.angle())
 	
 	# Connect signal to proper function spawner
 	new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
