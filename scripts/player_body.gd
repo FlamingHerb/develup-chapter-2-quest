@@ -58,13 +58,13 @@ func _input(_event: InputEvent) -> void:
 		hold_down_timer.paused = false
 		reload_animation.visible = true
 		reloading = true
-		print("Reloading")
+		#print("Reloading")
 		
 	if Input.is_action_just_released("player_reload"):
 		hold_down_timer.paused = true
 		reload_animation.visible = false
 		reloading = false
-		print("Not anymore")
+		#print("Not anymore")
 
 func _orbit_spawn_after_timeout() -> void:
 	# If children are already 10, don't bother reload.
@@ -87,7 +87,9 @@ func _shoot_item_loop() -> void:
 		# Stops function if there are no available things to fire.
 		if player_orbit.get_child_count() == 0: return
 		
+		# Disallow firing until done.
 		can_fire = false
+		
 		var new_projectile = actual_meteor_prefab.instantiate()
 		
 		# Get first available meteor.
@@ -103,6 +105,9 @@ func _shoot_item_loop() -> void:
 		# Prepare it to where it should be firing towards.
 		new_projectile.velocity = (new_projectile.position - position) / expected_meteor_speed
 		
+		# Connect signal to proper function spawner
+		new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
+		
 		# Add new projectile
 		asteroid_group.add_child(new_projectile)
 		#  Remove meteor reference
@@ -114,7 +119,29 @@ func _shoot_item_loop() -> void:
 		await get_tree().create_timer(rate_of_fire).timeout
 		can_fire = true
 
+func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
+	var new_projectile = actual_meteor_prefab.instantiate()
+	# Position new projectile to meteor reference
+	new_projectile.position = body_ref.get_global_position()		
+	# Set reference for projectile to know where player is
+	new_projectile.player_reference = self
+	new_projectile.meteor_speed = expected_meteor_speed
+	# Set meteor graphics to match with orbiting one.
+	new_projectile.meteor_sprite = body_ref.meteor_sprite
+	# Prepare it to where it should be firing towards.
+	new_projectile.velocity = body_ref.velocity.rotated(randf_range(-1, 1) * 2)
+	
+	#new_projectile.velocity.rotated(randf_range(-1, 1) * 2)
+	
+	print(new_projectile.velocity.angle())
+	
+	# Connect signal to proper function spawner
+	new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
+	
+	# Add new projectile
+	asteroid_group.add_child(new_projectile)
+
 func _on_asteroid_group_child_entered_tree(node: Node) -> void:
-	#print(asteroid_group.get_child_count())
+	print(asteroid_group.get_child_count())
 	if asteroid_group.get_child_count() == 64:
 		print("Bomb available.")

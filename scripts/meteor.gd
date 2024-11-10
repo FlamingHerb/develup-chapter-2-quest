@@ -19,14 +19,19 @@ func _ready() -> void:
 	_rotate_speed_sprite()
 	meteor_sprite_ref.texture = meteor_sprite
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
 func _physics_process(delta: float) -> void:
 	meteor_sprite_ref.rotation += rotation_speed * delta
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
+		
+		# Decide whether it will bounce towards player or not.
+		if not randf_range(0, 1) > 0.8: 
+			velocity = velocity.bounce(collision_info.get_normal())
+		else:
+			_apply_force_towards_player()
+		
+		
+		
 		# If it can spawn a meteor, call function and reset bounce counter.
 		if can_spawn_meteor == true:
 			_spawn_another_meteor()
@@ -34,12 +39,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			if not bounces >= 3: bounces += 1
 		
-		# Decide whether it will bounce towards player or not.
-		if not randf_range(0, 1) > 0.8: 
-			velocity = velocity.bounce(collision_info.get_normal())
-		else:
-			_apply_force_towards_player()
-			
 		# Decide if it will spawn another meteor.
 		if bounces >= 3:
 			if randf_range(0, 1) > 0.75:
@@ -54,9 +53,12 @@ func _apply_force_towards_player() -> void:
 	
 	velocity = ((player_reference.global_position - global_position) / new_time)
 
-
 func _spawn_another_meteor() -> void:
-	pass
+	# Emit back to game main.
+	will_spawn_meteor.emit(self)
+	
+	# Meteor will not spawn anymore.
+	can_spawn_meteor = false
 
 func _rotate_speed_sprite() -> void:
 	speed_sprite.rotation = velocity.angle() - (PI/2)
