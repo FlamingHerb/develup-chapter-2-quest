@@ -1,5 +1,17 @@
 extends CharacterBody2D
 
+# Change score
+signal change_score_gui(value: int)
+
+# Change stamina
+signal change_stamina_gui(value: int)
+
+# Emit 1 if adding, -1 if removing
+signal change_bomb_value_gui(value: int)
+
+# Change next bomb GUI
+signal change_next_bomb_gui(value: int)
+
 @onready var player_sprite = $PlayerSprite
 @onready var engine_fire_sprite = $PlayerSprite/EngineFire
 @onready var reload_animation = $ReloadAnim
@@ -18,6 +30,19 @@ var actual_meteor_prefab = preload("res://scenes/meteor.tscn")
 var can_fire = true
 var reloading = false
 
+# Remember, crucial.
+var bombs: int = 2:
+	set(value):
+		bombs = value
+		print("Current bomb count: ", bombs)
+
+# Placing it here to stop race condition.
+var score: int = 0:
+	get:
+		return score
+	set(value):
+		score = value
+		change_score_gui.emit(value)
 
 var meteor_graphics = [
 	preload("res://graphics/meteor/meteorbrown_big1.png"),
@@ -28,6 +53,11 @@ var meteor_graphics = [
 
 const SPEED = 200.0
 const ROTATION_SPEED = 2
+
+
+#===============================================================================
+# Functions
+#===============================================================================
 
 func _ready() -> void:
 	# Arm the timer
@@ -47,7 +77,7 @@ func _physics_process(_delta: float) -> void:
 	if velocity != Vector2(0, 0):
 		player_sprite.rotation = velocity.angle() - (PI/2)
 		engine_fire_sprite.visible = true
-	else: 
+	else:
 		engine_fire_sprite.visible = false
 	#endregion Movement
 	
@@ -65,11 +95,20 @@ func _input(_event: InputEvent) -> void:
 		reload_animation.visible = false
 		reloading = false
 		#print("Not anymore")
+	
+	if Input.is_action_just_pressed("player_bomb"):
+		if bombs != 0:
+			_bomb_function(-1)
+		else:
+			print("Bombs not available.")
 
 func _orbit_spawn_after_timeout() -> void:
 	# If children are already 10, don't bother reload.
 	var child_count = float(player_orbit.get_child_count())
-	if child_count > 10: return
+	if child_count > 9: return
+	
+	# Give score per each reload.
+	score += 2
 	
 	var new_meteor = meteor_orbit_prefab.instantiate()
 	new_meteor.meteor_sprite = meteor_graphics.pick_random()
@@ -93,10 +132,10 @@ func _shoot_item_loop() -> void:
 		var new_projectile = actual_meteor_prefab.instantiate()
 		
 		# Get randomly available meteor.
-		var meteor_reference = player_orbit.get_child(randi() % player_orbit.get_child_count())						
+		var meteor_reference = player_orbit.get_child(randi() % player_orbit.get_child_count())
 		
 		# Position new projectile to meteor reference
-		new_projectile.position = meteor_reference.get_global_position()		
+		new_projectile.position = meteor_reference.get_global_position()
 		# Set reference for projectile to know where player is
 		new_projectile.player_reference = self
 		new_projectile.meteor_speed = expected_meteor_speed
@@ -115,6 +154,9 @@ func _shoot_item_loop() -> void:
 		# Allow visual reloading to show up again.
 		reload_animation.modulate = reloading_color
 		
+		# Add scoring after firing.
+		score += 3
+		
 		# Wait for next firing sequence.
 		await get_tree().create_timer(rate_of_fire).timeout
 		can_fire = true
@@ -122,7 +164,7 @@ func _shoot_item_loop() -> void:
 func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	var new_projectile = actual_meteor_prefab.instantiate()
 	# Position new projectile to meteor reference
-	new_projectile.position = body_ref.get_global_position()		
+	new_projectile.position = body_ref.get_global_position()
 	# Set reference for projectile to know where player is
 	new_projectile.player_reference = self
 	new_projectile.meteor_speed = expected_meteor_speed
@@ -139,5 +181,33 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 
 func _on_asteroid_group_child_entered_tree(node: Node) -> void:
 	#print(asteroid_group.get_child_count())
-	if asteroid_group.get_child_count() == 64:
-		print("Bomb available.")
+	
+	change_next_bomb_gui.emit(asteroid_group.get_child_count())
+	
+	score += 1
+	
+	if asteroid_group.get_child_count() % 64 == 0 and asteroid_group.get_child_count() > 0:
+		_bomb_function(1)
+
+## 1 for add
+## -1 for remove
+func _bomb_function(value: int) -> void:
+	match value:
+		1:
+			# Do not add if bombs are already at 2.
+			if bombs > 1: 
+				print("Bombs are full.")
+				return
+			bombs += 1
+			change_bomb_value_gui.emit(1)
+		-1:
+			# Technically, will not run when bombs are 0. Done by input.
+			bombs -= 1
+			
+			# Remove all the meteors currently in the game.
+			get_tree().call_group("Meteor", "queue_free")
+			change_next_bomb_gui.emit(0)
+			
+			# Tell the GUI to remove a bomb.
+			change_bomb_value_gui.emit(-1)
+			
