@@ -29,7 +29,7 @@ window/stretch/mode="canvas_items"
 
 [gui]
 
-theme/custom_font="res://fonts/kenney_space.ttf"
+theme/default_font_antialiasing=2
 
 [input]
 

@@ -1,4 +1,7 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://bsri7cixmd4ak"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bsri7cixmd4ak"]
+
+[ext_resource type="FontFile" uid="uid://dhgmmhbd8dhij" path="res://fonts/kenney_space.ttf" id="1_3r14r"]
 
 [resource]
+font = ExtResource("1_3r14r")
 font_size = 28
