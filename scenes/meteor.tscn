@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://boiaj06qhcf4l"]
 
-[ext_resource type="Texture2D" uid="uid://yiveu0umnfrs" path="res://graphics/meteor/meteorbrown_big1.png" id="1_87wc5"]
 [ext_resource type="Script" path="res://scripts/meteor.gd" id="1_a64fa"]
+[ext_resource type="Texture2D" uid="uid://cw4w8biu3em5e" path="res://graphics/meteor/meteorbrown_big1.png" id="2_mpe4d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nisio"]
 radius = 4.0
@@ -14,7 +14,7 @@ script = ExtResource("1_a64fa")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_87wc5")
+texture = ExtResource("2_mpe4d")
 
 [node name="PrimaryHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nisio")

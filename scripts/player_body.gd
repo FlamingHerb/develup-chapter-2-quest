@@ -18,6 +18,14 @@ var actual_meteor_prefab = preload("res://scenes/meteor.tscn")
 var can_fire = true
 var reloading = false
 
+
+var meteor_graphics = [
+	preload("res://graphics/meteor/meteorbrown_big1.png"),
+	preload("res://graphics/meteor/meteorbrown_big2.png"),
+	preload("res://graphics/meteor/meteorbrown_big3.png"),
+	preload("res://graphics/meteor/meteorbrown_big4.png"),
+]
+
 const SPEED = 200.0
 const ROTATION_SPEED = 2
 
@@ -25,7 +33,7 @@ func _ready() -> void:
 	# Arm the timer
 	hold_down_timer.paused = true
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	#region Movement
@@ -45,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("player_reload"):
 		hold_down_timer.paused = false
 		reload_animation.visible = true
@@ -60,15 +68,17 @@ func _input(event: InputEvent) -> void:
 
 func _orbit_spawn_after_timeout() -> void:
 	# If children are already 10, don't bother reload.
-	if player_orbit.get_child_count() > 9: return
+	var child_count = float(player_orbit.get_child_count())
+	if child_count > 10: return
 	
 	var new_meteor = meteor_orbit_prefab.instantiate()
+	new_meteor.meteor_sprite = meteor_graphics.pick_random()
 	
 	player_orbit.add_child(new_meteor)
 	
-	print("Spawning. Current Count: ", player_orbit.get_child_count())
+	#print("Spawning. Current Count: ", child_count)
 	
-	if player_orbit.get_child_count() == 10:
+	if child_count == 10:
 		reload_animation.modulate = full_reload_color
 
 # Reference: https://youtu.be/isA7P9ulBwE?si=SC0jZh4npf7n6H8E&t=576
@@ -88,6 +98,8 @@ func _shoot_item_loop() -> void:
 		# Set reference for projectile to know where player is
 		new_projectile.player_reference = self
 		new_projectile.meteor_speed = expected_meteor_speed
+		# Set meteor graphics to match with orbiting one.
+		new_projectile.meteor_sprite = meteor_reference.meteor_sprite
 		# Prepare it to where it should be firing towards.
 		new_projectile.velocity = (new_projectile.position - position) / expected_meteor_speed
 		
@@ -103,6 +115,6 @@ func _shoot_item_loop() -> void:
 		can_fire = true
 
 func _on_asteroid_group_child_entered_tree(node: Node) -> void:
-	print(asteroid_group.get_child_count())
+	#print(asteroid_group.get_child_count())
 	if asteroid_group.get_child_count() == 64:
 		print("Bomb available.")
