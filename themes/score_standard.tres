@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b8tuhrkmxsm73"]
+
+[ext_resource type="FontFile" uid="uid://ddcowvvto5ied" path="res://fonts/kenney_pixel.ttf" id="1_xxt0r"]
+
+[resource]
+font = ExtResource("1_xxt0r")
+font_size = 128
+font_color = Color(0.252028, 0.252028, 0.252028, 1)

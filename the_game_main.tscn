@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=33 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -11,6 +11,19 @@
 [ext_resource type="Texture2D" uid="uid://chcifsrigdk8n" path="res://graphics/spaceship_parts/star2.png" id="10_oiyhr"]
 [ext_resource type="Texture2D" uid="uid://c7ecsudvniv8c" path="res://graphics/spaceship_parts/fire07.png" id="11_5hf15"]
 [ext_resource type="Texture2D" uid="uid://mluchhfl31du" path="res://graphics/spaceship_parts/star3.png" id="11_vs6nw"]
+[ext_resource type="LabelSettings" uid="uid://bsri7cixmd4ak" path="res://themes/ui_standard.tres" id="12_lwaey"]
+[ext_resource type="StyleBox" uid="uid://dy3q2vktffieh" path="res://themes/orange_panel_corner.tres" id="12_ur6vw"]
+[ext_resource type="LabelSettings" uid="uid://b8tuhrkmxsm73" path="res://themes/score_standard.tres" id="13_wafso"]
+[ext_resource type="StyleBox" uid="uid://b267xrlxbunc7" path="res://themes/green_panel_corner.tres" id="15_qlfci"]
+[ext_resource type="Texture2D" uid="uid://xp1bpevdme2k" path="res://graphics/gui/bar_square_background.png" id="16_05tvf"]
+[ext_resource type="Texture2D" uid="uid://n1h70mceie4g" path="res://graphics/gui/bar_square_gloss_large.png" id="16_jyq0b"]
+[ext_resource type="Texture2D" uid="uid://coggrx3fc1ah6" path="res://graphics/gui/bar_square_over.png" id="17_2khtk"]
+[ext_resource type="StyleBox" uid="uid://ds2t5deenfw8j" path="res://themes/blue_panel_corner.tres" id="17_fxs6w"]
+[ext_resource type="Texture2D" uid="uid://cgp0r3duyvbtv" path="res://graphics/gui/powerupBlue_bolt.png" id="18_dphn0"]
+[ext_resource type="Texture2D" uid="uid://dpl2k7alykla8" path="res://graphics/gui/metalPanel_blue.png" id="21_s3m6q"]
+[ext_resource type="Texture2D" uid="uid://bq7n0qwi433va" path="res://graphics/gui/blue_bar_back.png" id="22_dffrd"]
+[ext_resource type="Texture2D" uid="uid://cdst37a4rmk0m" path="res://graphics/gui/blue_bar_over.png" id="23_jlc4a"]
+[ext_resource type="Texture2D" uid="uid://db4dshx5m4ay8" path="res://graphics/gui/blue_bar_prog.png" id="24_ks7uw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
 bounce = 1.0
@@ -70,6 +83,14 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i870f"]
+texture = ExtResource("21_s3m6q")
+texture_margin_left = 32.0
+texture_margin_top = 30.0
+texture_margin_right = 55.0
+texture_margin_bottom = 18.0
+region_rect = Rect2(0, 0, 100, 100)
+
 [node name="TheGameMain" type="Node"]
 script = ExtResource("1_o1j5i")
 
@@ -90,6 +111,7 @@ texture = ExtResource("2_2nlbx")
 metadata/_edit_lock_ = true
 
 [node name="CollisionsArea" type="StaticBody2D" parent="."]
+visible = false
 physics_material_override = SubResource("PhysicsMaterial_x0cmf")
 metadata/_edit_lock_ = true
 
@@ -114,6 +136,7 @@ shape = SubResource("RectangleShape2D_gjsxq")
 metadata/_edit_lock_ = true
 
 [node name="PlayerCollisionOnly" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_x0cmf")
@@ -122,21 +145,25 @@ metadata/_edit_lock_ = true
 [node name="RightSide" type="CollisionShape2D" parent="PlayerCollisionOnly"]
 position = Vector2(1477, 540)
 shape = SubResource("RectangleShape2D_oxnbc")
+debug_color = Color(1, 0, 0, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="LeftSide" type="CollisionShape2D" parent="PlayerCollisionOnly"]
 position = Vector2(443, 540)
 shape = SubResource("RectangleShape2D_oxnbc")
+debug_color = Color(1, 0, 0, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="UpSide" type="CollisionShape2D" parent="PlayerCollisionOnly"]
 position = Vector2(960, 23)
 shape = SubResource("RectangleShape2D_gjsxq")
+debug_color = Color(1, 0, 0, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="DownSide" type="CollisionShape2D" parent="PlayerCollisionOnly"]
 position = Vector2(960, 1057)
 shape = SubResource("RectangleShape2D_gjsxq")
+debug_color = Color(1, 0, 0, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="PlayerBody" type="CharacterBody2D" parent="."]
@@ -185,6 +212,180 @@ wait_time = 0.3
 autostart = true
 
 [node name="AsteroidGroup" type="CanvasGroup" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="UIStuff" type="CanvasLayer" parent="."]
+
+[node name="LeftSide" type="Control" parent="UIStuff"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 448.0
+offset_bottom = 1080.0
+metadata/_edit_lock_ = true
+
+[node name="RightSide" type="Control" parent="UIStuff"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1472.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+metadata/_edit_lock_ = true
+
+[node name="ScorePanel" type="Panel" parent="UIStuff/RightSide"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 25.0
+offset_top = 32.0
+offset_right = 225.0
+offset_bottom = 112.0
+scale = Vector2(2, 2)
+theme_override_styles/panel = ExtResource("12_ur6vw")
+metadata/_edit_lock_ = true
+
+[node name="ScoreLabel" type="Label" parent="UIStuff/RightSide/ScorePanel"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 179.0
+offset_bottom = 52.0
+scale = Vector2(0.5, 0.5)
+text = "Score"
+label_settings = ExtResource("12_lwaey")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="ScoreText" type="Label" parent="UIStuff/RightSide/ScorePanel"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 396.0
+offset_bottom = 123.0
+scale = Vector2(0.5, 0.5)
+text = "0000000"
+label_settings = ExtResource("13_wafso")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+metadata/_edit_lock_ = true
+
+[node name="StaminaPanel" type="Panel" parent="UIStuff/RightSide"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 25.0
+offset_top = 216.0
+offset_right = 225.0
+offset_bottom = 296.0
+scale = Vector2(2, 2)
+theme_override_styles/panel = ExtResource("15_qlfci")
+metadata/_edit_lock_ = true
+
+[node name="StaminaLabel" type="Label" parent="UIStuff/RightSide/StaminaPanel"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 179.0
+offset_bottom = 52.0
+scale = Vector2(0.5, 0.5)
+text = "Stamina"
+label_settings = ExtResource("12_lwaey")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="StaminaBar" type="TextureProgressBar" parent="UIStuff/RightSide/StaminaPanel"]
+layout_mode = 0
+offset_left = 7.5
+offset_top = 34.5
+offset_right = 199.5
+offset_bottom = 82.5
+scale = Vector2(0.95, 0.65)
+texture_under = ExtResource("16_05tvf")
+texture_over = ExtResource("17_2khtk")
+texture_progress = ExtResource("16_jyq0b")
+metadata/_edit_lock_ = true
+
+[node name="BombPanel" type="Panel" parent="UIStuff/RightSide"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 25.0
+offset_top = 400.0
+offset_right = 225.0
+offset_bottom = 480.0
+scale = Vector2(2, 2)
+theme_override_styles/panel = ExtResource("17_fxs6w")
+metadata/_edit_lock_ = true
+
+[node name="BombsLabel" type="Label" parent="UIStuff/RightSide/BombPanel"]
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 190.0
+offset_bottom = 52.0
+scale = Vector2(0.5, 0.5)
+text = "Bombs"
+label_settings = ExtResource("12_lwaey")
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="BombContainer" type="HBoxContainer" parent="UIStuff/RightSide/BombPanel"]
+texture_filter = 5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -4.0
+offset_right = 17.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bomb1" type="TextureRect" parent="UIStuff/RightSide/BombPanel/BombContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("18_dphn0")
+
+[node name="Bomb2" type="TextureRect" parent="UIStuff/RightSide/BombPanel/BombContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("18_dphn0")
+
+[node name="NextBombPanel" type="Panel" parent="UIStuff/RightSide"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 25.0
+offset_top = 584.0
+offset_right = 225.0
+offset_bottom = 664.0
+scale = Vector2(2, 2)
+theme_override_styles/panel = SubResource("StyleBoxTexture_i870f")
+metadata/_edit_lock_ = true
+
+[node name="NextBombLabel" type="Label" parent="UIStuff/RightSide/NextBombPanel"]
+layout_mode = 1
+offset_left = 17.5
+offset_top = 4.5
+offset_right = 353.5
+offset_bottom = 50.5
+scale = Vector2(0.5, 0.5)
+text = "Next Bomb %"
+label_settings = ExtResource("12_lwaey")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="StaminaBar" type="TextureProgressBar" parent="UIStuff/RightSide/NextBombPanel"]
+offset_left = 7.5
+offset_top = 34.5
+offset_right = 199.5
+offset_bottom = 82.5
+scale = Vector2(0.95, 0.65)
+max_value = 64.0
+texture_under = ExtResource("22_dffrd")
+texture_over = ExtResource("23_jlc4a")
+texture_progress = ExtResource("24_ks7uw")
 metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="PlayerBody/HoldDownTimer" to="PlayerBody" method="_orbit_spawn_after_timeout"]

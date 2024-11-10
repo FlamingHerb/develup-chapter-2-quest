@@ -138,6 +138,6 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	asteroid_group.add_child(new_projectile)
 
 func _on_asteroid_group_child_entered_tree(node: Node) -> void:
-	print(asteroid_group.get_child_count())
+	#print(asteroid_group.get_child_count())
 	if asteroid_group.get_child_count() == 64:
 		print("Bomb available.")
