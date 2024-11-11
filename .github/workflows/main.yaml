@@ -44,7 +44,7 @@ jobs:
               path: build/windows
 
           - name: Zipping for Release
-            run: zip -r -q windows.zip build/windows/
+            run: zip windows.zip build/windows/
 
           - name: Creating Release
             uses: ncipollo/release-action@v1.14.0
