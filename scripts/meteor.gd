@@ -4,10 +4,12 @@ var player_reference: CharacterBody2D
 var speed_factor: float
 var known_constant_velocity: Vector2
 var rotation_speed: float = 2
+var game_over_on: bool = false
 
 var bounces: int = 0
 var can_spawn_meteor: bool = false
 signal will_spawn_meteor(body_reference: CharacterBody2D)
+signal player_hit()
 
 var meteor_sprite: CompressedTexture2D
 @onready var meteor_sprite_ref = $Sprite
@@ -24,13 +26,17 @@ func _physics_process(delta: float) -> void:
 	var collision_info = move_and_collide(velocity * delta * speed_factor)
 	if collision_info:
 		
+		
+		if collision_info.get_collider().name == player_reference.name:
+			player_hit.emit()
+			if game_over_on == true: queue_free()
+		
 		# Decide whether it will bounce towards player or not.
 		if not randf_range(0, 1) > 0.8: 
 			velocity = velocity.bounce(collision_info.get_normal())
 		else:
-			_apply_force_towards_player()
-		
-		
+			if game_over_on == false: _apply_force_towards_player()
+			else: velocity = velocity.bounce(collision_info.get_normal())
 		
 		# If it can spawn a meteor, call function and reset bounce counter.
 		if can_spawn_meteor == true:
@@ -65,3 +71,7 @@ func _rotate_speed_sprite() -> void:
 
 func change_speed_factor(value: float) -> void:
 	speed_factor = value
+
+func game_over_sequence() -> void:
+	change_speed_factor(0.5)
+	game_over_on = true

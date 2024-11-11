@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum States {IDLE, MOVING, BOOSTING, SLOWDOWN}
+enum States {IDLE, MOVING, BOOSTING, SLOWDOWN, GAMEOVER}
 
 # Change score
 signal change_score_gui(value: int)
@@ -19,6 +19,7 @@ signal change_next_bomb_gui(value: int)
 @onready var boost_fire_sprite = $PlayerSprite/BoostEngineFire
 @onready var reload_animation = $ReloadAnim
 @onready var hold_down_timer = $HoldDownTimer
+@onready var game_over_timer = $GameOverTimer
 @onready var player_orbit = $PlayerOrbit
 @onready var asteroid_group = $"../AsteroidGroup"
 
@@ -105,7 +106,7 @@ func _physics_process(delta: float) -> void:
 			actual_speed *= 0.5
 			
 		velocity = input_direction.normalized() * actual_speed
-		_shoot_item_loop()
+		if not current_state == States.GAMEOVER: _shoot_item_loop()
 	else:
 		velocity = Vector2.ZERO
 	#endregion Movement
@@ -118,6 +119,7 @@ func _physics_process(delta: float) -> void:
 		stamina -= stamina_decay 
 	elif current_state == States.SLOWDOWN:
 		stamina -= stamina_decay * 1.5
+	
 	#endregion Stamina
 	
 	if velocity != Vector2.ZERO:
@@ -132,6 +134,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(_event: InputEvent) -> void:
+	# Disallow entry if it turns out player has died.
+	if current_state == States.GAMEOVER: return
+	
 	if not (current_state == States.BOOSTING or current_state == States.SLOWDOWN):
 		if Input.get_vector("player_left", "player_right", "player_up", "player_down") != Vector2.ZERO:
 			current_state = States.MOVING
@@ -221,6 +226,7 @@ func _shoot_item_loop() -> void:
 		
 		# Connect signal to proper function spawner
 		new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
+		new_projectile.player_hit.connect(_player_got_hit)
 		
 		# Add new projectile
 		asteroid_group.add_child(new_projectile)
@@ -230,7 +236,7 @@ func _shoot_item_loop() -> void:
 		reload_animation.modulate = reloading_color
 		
 		# Add scoring after firing.
-		score += 3
+		score += 2
 		
 		# Wait for next firing sequence.
 		await get_tree().create_timer(rate_of_fire).timeout
@@ -243,6 +249,8 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	# Set reference for projectile to know where player is
 	new_projectile.player_reference = self
 	new_projectile.speed_factor = body_ref.speed_factor
+	# Projectile also inherits parents game_over_attribute as future-proofing.
+	new_projectile.game_over_on = body_ref.game_over_on
 	# Set meteor graphics to match with orbiting one.
 	new_projectile.meteor_sprite = body_ref.meteor_sprite
 	# Prepare it to where it should be firing towards.
@@ -252,6 +260,9 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	
 	# Connect signal to proper function spawner
 	new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
+	new_projectile.player_hit.connect(_player_got_hit)
+	
+
 	
 	# Add new projectile
 	asteroid_group.add_child(new_projectile)
@@ -261,7 +272,8 @@ func _on_asteroid_group_child_entered_tree(_node: Node) -> void:
 	
 	change_next_bomb_gui.emit(asteroid_group.get_child_count())
 	
-	score += 1
+	# Will only add score WHEN player is alive!
+	if not current_state == States.GAMEOVER: score += 1
 	
 	if asteroid_group.get_child_count() % 64 == 0 and asteroid_group.get_child_count() > 0:
 		_bomb_function(1)
@@ -288,7 +300,6 @@ func _bomb_function(value: int) -> void:
 			# Tell the GUI to remove a bomb.
 			change_bomb_value_gui.emit(-1)
 			
-
 func _force_back_to_idle_moving() -> void:
 	boost_fire_sprite.visible = false
 	get_tree().call_group("Meteor", "change_speed_factor", 1)
@@ -296,3 +307,33 @@ func _force_back_to_idle_moving() -> void:
 		current_state = States.MOVING
 	else: 
 		current_state = States.IDLE
+
+func _player_got_hit() -> void:
+	# Only occurs if meteor hits player again during GAMEOVER state.
+	if current_state == States.GAMEOVER:
+		print("Player grabs meteor.")
+		score += 1
+		return
+		
+	# Force player to go back before switching states.
+	_force_back_to_idle_moving()
+	
+	
+	# Sasme as if Input.is_action_just_released("player_reload"):
+	hold_down_timer.paused = true
+	reload_animation.visible = false
+	reloading = false
+	
+	# Slows player down.
+	
+	current_state = States.GAMEOVER
+	game_over_timer.start()
+	
+	# Tell meteors that behavior is not different.
+	get_tree().call_group("Meteor", "game_over_sequence")
+	
+	
+	print("Player hit! Game over!")
+
+func _on_game_over_timer_timeout() -> void:
+	print("Times out, time to die!")

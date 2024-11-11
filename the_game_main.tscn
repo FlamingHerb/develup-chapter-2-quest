@@ -242,6 +242,10 @@ curve = SubResource("Curve2D_m0dgu")
 wait_time = 0.2
 autostart = true
 
+[node name="GameOverTimer" type="Timer" parent="PlayerBody"]
+wait_time = 7.0
+one_shot = true
+
 [node name="AsteroidGroup" type="CanvasGroup" parent="."]
 metadata/_edit_lock_ = true
 
@@ -424,4 +428,5 @@ texture_progress = ExtResource("22_py7ja")
 metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="PlayerBody/HoldDownTimer" to="PlayerBody" method="_orbit_spawn_after_timeout"]
+[connection signal="timeout" from="PlayerBody/GameOverTimer" to="PlayerBody" method="_on_game_over_timer_timeout"]
 [connection signal="child_entered_tree" from="AsteroidGroup" to="PlayerBody" method="_on_asteroid_group_child_entered_tree"]
