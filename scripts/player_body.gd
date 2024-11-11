@@ -210,7 +210,7 @@ func _shoot_item_loop() -> void:
 		# Set reference for projectile to know where player is
 		new_projectile.player_reference = self
 		
-		new_projectile.speed_factor = 1 if current_state != States.SLOWDOWN else 0.5
+		new_projectile.speed_factor = 1.0 if current_state != States.SLOWDOWN else 0.5
 		# Set meteor graphics to match with orbiting one.
 		new_projectile.meteor_sprite = meteor_reference.meteor_sprite
 		# Prepare it to where it should be firing towards.
@@ -243,7 +243,9 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	# Set meteor graphics to match with orbiting one.
 	new_projectile.meteor_sprite = body_ref.meteor_sprite
 	# Prepare it to where it should be firing towards.
-	new_projectile.velocity = body_ref.velocity.rotated(randf_range(-1, 1) * 2)
+	if randf() > 0.5: new_projectile.velocity = body_ref.velocity.rotated(randf_range(-1, 0.1) * 2)
+	else: new_projectile.velocity = body_ref.velocity.rotated(randf_range(0.1, 1) * 2)
+		
 	
 	# Connect signal to proper function spawner
 	new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
@@ -251,7 +253,7 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	# Add new projectile
 	asteroid_group.add_child(new_projectile)
 
-func _on_asteroid_group_child_entered_tree(node: Node) -> void:
+func _on_asteroid_group_child_entered_tree(_node: Node) -> void:
 	#print(asteroid_group.get_child_count())
 	
 	change_next_bomb_gui.emit(asteroid_group.get_child_count())
