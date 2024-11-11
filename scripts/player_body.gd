@@ -16,6 +16,7 @@ signal change_next_bomb_gui(value: int)
 
 @onready var player_sprite = $PlayerSprite
 @onready var engine_fire_sprite = $PlayerSprite/EngineFire
+@onready var boost_fire_sprite = $PlayerSprite/BoostEngineFire
 @onready var reload_animation = $ReloadAnim
 @onready var hold_down_timer = $HoldDownTimer
 @onready var player_orbit = $PlayerOrbit
@@ -121,8 +122,10 @@ func _physics_process(delta: float) -> void:
 	
 	if velocity != Vector2.ZERO:
 		player_sprite.rotation = velocity.angle() - (PI/2)
-		engine_fire_sprite.visible = true
+		if current_state == States.BOOSTING: boost_fire_sprite.visible = true
+		else: engine_fire_sprite.visible = true
 	else:
+		boost_fire_sprite.visible = false
 		engine_fire_sprite.visible = false
 	
 	
@@ -287,6 +290,7 @@ func _bomb_function(value: int) -> void:
 			
 
 func _force_back_to_idle_moving() -> void:
+	boost_fire_sprite.visible = false
 	get_tree().call_group("Meteor", "change_speed_factor", 1)
 	if velocity != Vector2.ZERO:
 		current_state = States.MOVING

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=35 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -6,10 +6,13 @@
 [ext_resource type="Script" path="res://scripts/player_body.gd" id="3_6f0q0"]
 [ext_resource type="Texture2D" uid="uid://ciq23gpd0p816" path="res://graphics/spaceship_parts/fire02.png" id="6_n3ii6"]
 [ext_resource type="Texture2D" uid="uid://cmsk66txox132" path="res://graphics/spaceship_parts/fire03.png" id="7_tqw60"]
+[ext_resource type="Texture2D" uid="uid://dn62gsdev1ddk" path="res://graphics/spaceship_parts/fire01.png" id="9_5yifa"]
 [ext_resource type="Texture2D" uid="uid://og4op571jbrc" path="res://graphics/spaceship_parts/star1.png" id="9_gcr0f"]
 [ext_resource type="Texture2D" uid="uid://chc1usc2wheit" path="res://graphics/spaceship_parts/fire06.png" id="10_18cmd"]
 [ext_resource type="Texture2D" uid="uid://chcifsrigdk8n" path="res://graphics/spaceship_parts/star2.png" id="10_oiyhr"]
+[ext_resource type="Texture2D" uid="uid://0mo5wxxg0w4u" path="res://graphics/spaceship_parts/fire04.png" id="10_tjxgg"]
 [ext_resource type="Texture2D" uid="uid://c7ecsudvniv8c" path="res://graphics/spaceship_parts/fire07.png" id="11_5hf15"]
+[ext_resource type="Texture2D" uid="uid://cvm0mfsh7ngdk" path="res://graphics/spaceship_parts/fire05.png" id="11_8elok"]
 [ext_resource type="Texture2D" uid="uid://mluchhfl31du" path="res://graphics/spaceship_parts/star3.png" id="11_vs6nw"]
 [ext_resource type="Script" path="res://scripts/ui_stuff.gd" id="12_ekx06"]
 [ext_resource type="LabelSettings" uid="uid://bsri7cixmd4ak" path="res://themes/ui_standard.tres" id="12_lwaey"]
@@ -46,6 +49,26 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_5hf15")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_spuxe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_n3ii6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5yifa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_tjxgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8elok")
 }],
 "loop": true,
 "name": &"default",
@@ -180,12 +203,22 @@ texture = ExtResource("2_wgf0d")
 flip_v = true
 
 [node name="EngineFire" type="AnimatedSprite2D" parent="PlayerBody/PlayerSprite"]
+visible = false
 z_as_relative = false
 position = Vector2(0, -50)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vvj0e")
 autoplay = "default"
 frame_progress = 0.680424
+
+[node name="BoostEngineFire" type="AnimatedSprite2D" parent="PlayerBody/PlayerSprite"]
+visible = false
+z_as_relative = false
+position = Vector2(0, -50)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_spuxe")
+autoplay = "default"
+frame_progress = 0.276078
 
 [node name="ReloadAnim" type="AnimatedSprite2D" parent="PlayerBody"]
 visible = false
