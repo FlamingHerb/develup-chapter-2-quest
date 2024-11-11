@@ -35,7 +35,7 @@ jobs:
               mkdir -v -p build/windows
               EXPORT_DIR="$(readlink -f build)"
               cd $PROJECT_PATH
-              godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/game.exe"
+              godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/develup_quest_chapter_2.exe"
           - name: Upload Artifact
             id: upload_artifact
             uses: actions/upload-artifact@v4
