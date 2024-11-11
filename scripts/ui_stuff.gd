@@ -46,3 +46,6 @@ func change_next_bomb_bar(value: int) -> void:
 	#print(value)
 	next_bomb_bar.value = clampi(value, next_bomb_bar.min_value, next_bomb_bar.max_value)
 	overcharge_bar.value = clampi(value - 64, overcharge_bar.min_value, overcharge_bar.max_value)
+
+func reset_game() -> void:
+	print("Resetting UI.")

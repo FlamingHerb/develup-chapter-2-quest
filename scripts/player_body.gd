@@ -14,6 +14,9 @@ signal change_bomb_value_gui(value: int)
 # Change next bomb GUI
 signal change_next_bomb_gui(value: int)
 
+# Tell entire game to reset.
+signal reset_game()
+
 @onready var player_sprite = $PlayerSprite
 @onready var engine_fire_sprite = $PlayerSprite/EngineFire
 @onready var boost_fire_sprite = $PlayerSprite/BoostEngineFire
@@ -337,4 +340,8 @@ func _player_got_hit() -> void:
 	print("Player hit! Game over!")
 
 func _on_game_over_timer_timeout() -> void:
+	_reset_game()
 	print("Times out, time to die!")
+
+func _reset_game():
+	reset_game.emit()
