@@ -22,7 +22,7 @@ signal change_next_bomb_gui(value: int)
 @onready var asteroid_group = $"../AsteroidGroup"
 
 @onready var reloading_color = Color(0.706, 0.396, 0.612)
-@onready var full_reload_color = Color.RED
+@onready var full_reload_color = Color8(243, 170, 44)
 
 @export var rate_of_fire: float = 0.4
 @export var expected_meteor_speed: float = 0.2
@@ -90,7 +90,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	
+	if stamina <= 0:
+		_force_back_to_idle_moving()
 	
 	#region Movement
 	if not reloading:
@@ -153,29 +154,23 @@ func _input(_event: InputEvent) -> void:
 			print("Bombs not available.")
 
 	#region Player Boosting
-	if Input.is_action_just_pressed("player_boost"):
+	if Input.is_action_just_pressed("player_boost") and stamina > 10:
 		if current_state != States.SLOWDOWN:
 			current_state = States.BOOSTING
 		
 	if Input.is_action_just_released("player_boost"):
-		if velocity != Vector2.ZERO:
-			current_state = States.MOVING
-		else: 
-			current_state = States.IDLE
+		_force_back_to_idle_moving()
 	#endregion Player Boosting
 	
 	#region Slowdown
-	if Input.is_action_just_pressed("player_time_control"):
+	if Input.is_action_just_pressed("player_time_control") and stamina > 10:
 		if current_state != States.BOOSTING:
 			get_tree().call_group("Meteor", "change_speed_factor", 0.5)
 			current_state = States.SLOWDOWN
 			
 	if Input.is_action_just_released("player_time_control"):
-		get_tree().call_group("Meteor", "change_speed_factor", 1)
-		if velocity != Vector2.ZERO:
-			current_state = States.MOVING
-		else: 
-			current_state = States.IDLE
+		#get_tree().call_group("Meteor", "change_speed_factor", 1)
+		_force_back_to_idle_moving()
 	#endregion Slowdown
 	
 func _orbit_spawn_after_timeout() -> void:
@@ -288,3 +283,10 @@ func _bomb_function(value: int) -> void:
 			# Tell the GUI to remove a bomb.
 			change_bomb_value_gui.emit(-1)
 			
+
+func _force_back_to_idle_moving() -> void:
+	get_tree().call_group("Meteor", "change_speed_factor", 1)
+	if velocity != Vector2.ZERO:
+		current_state = States.MOVING
+	else: 
+		current_state = States.IDLE
