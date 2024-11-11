@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var player_reference: CharacterBody2D
-var meteor_speed: float
+var speed_factor: float
 var known_constant_velocity: Vector2
 var rotation_speed: float = 2
 
@@ -20,8 +20,8 @@ func _ready() -> void:
 	meteor_sprite_ref.texture = meteor_sprite
 	
 func _physics_process(delta: float) -> void:
-	meteor_sprite_ref.rotation += rotation_speed * delta
-	var collision_info = move_and_collide(velocity * delta)
+	meteor_sprite_ref.rotation += rotation_speed * delta * speed_factor
+	var collision_info = move_and_collide(velocity * delta * speed_factor)
 	if collision_info:
 		
 		# Decide whether it will bounce towards player or not.
@@ -62,3 +62,6 @@ func _spawn_another_meteor() -> void:
 
 func _rotate_speed_sprite() -> void:
 	speed_sprite.rotation = velocity.angle() - (PI/2)
+
+func change_speed_factor(value: float) -> void:
+	speed_factor = value

@@ -90,6 +90,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	
+	
 	#region Movement
 	if not reloading:
 		var input_direction = Input.get_vector("player_left", "player_right", "player_up", "player_down")
@@ -104,21 +106,24 @@ func _physics_process(delta: float) -> void:
 		_shoot_item_loop()
 	else:
 		velocity = Vector2.ZERO
+	#endregion Movement
 	
+	#region Stamina
 	# Stamina checking.
 	if current_state == States.IDLE or current_state == States.MOVING:
-		stamina += stamina_decay * delta
+		stamina += stamina_decay * 0.5
 	elif current_state == States.BOOSTING and velocity != Vector2.ZERO:
-		stamina -= stamina_decay * delta
+		stamina -= stamina_decay 
 	elif current_state == States.SLOWDOWN:
-		stamina -= stamina_decay * delta * 2
+		stamina -= stamina_decay * 1.5
+	#endregion Stamina
 	
 	if velocity != Vector2.ZERO:
 		player_sprite.rotation = velocity.angle() - (PI/2)
 		engine_fire_sprite.visible = true
 	else:
 		engine_fire_sprite.visible = false
-	#endregion Movement
+	
 	
 	move_and_slide()
 
@@ -162,9 +167,11 @@ func _input(_event: InputEvent) -> void:
 	#region Slowdown
 	if Input.is_action_just_pressed("player_time_control"):
 		if current_state != States.BOOSTING:
+			get_tree().call_group("Meteor", "change_speed_factor", 0.5)
 			current_state = States.SLOWDOWN
 			
 	if Input.is_action_just_released("player_time_control"):
+		get_tree().call_group("Meteor", "change_speed_factor", 1)
 		if velocity != Vector2.ZERO:
 			current_state = States.MOVING
 		else: 
@@ -207,7 +214,8 @@ func _shoot_item_loop() -> void:
 		new_projectile.position = meteor_reference.get_global_position()
 		# Set reference for projectile to know where player is
 		new_projectile.player_reference = self
-		new_projectile.meteor_speed = expected_meteor_speed
+		
+		new_projectile.speed_factor = 1 if current_state != States.SLOWDOWN else 0.5
 		# Set meteor graphics to match with orbiting one.
 		new_projectile.meteor_sprite = meteor_reference.meteor_sprite
 		# Prepare it to where it should be firing towards.
@@ -236,7 +244,7 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	new_projectile.position = body_ref.get_global_position()
 	# Set reference for projectile to know where player is
 	new_projectile.player_reference = self
-	new_projectile.meteor_speed = expected_meteor_speed
+	new_projectile.speed_factor = body_ref.speed_factor
 	# Set meteor graphics to match with orbiting one.
 	new_projectile.meteor_sprite = body_ref.meteor_sprite
 	# Prepare it to where it should be firing towards.
