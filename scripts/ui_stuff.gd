@@ -26,8 +26,8 @@ func _process(delta: float) -> void:
 func change_score(value: int) -> void:
 	score_text.text = "%0*d" % [7, value]
 
-func change_stamina_bar(value: int) -> void:
-	pass
+func change_stamina_bar(value: float) -> void:
+	stamina_bar.value = clampf(value, stamina_bar.min_value, stamina_bar.max_value)
 
 ## 1 is adding, -1 if removing
 func change_bomb_value(value: int) -> void:
@@ -43,6 +43,6 @@ func _add_bomb_graphic() -> void:
 	bomb_container.add_child(new_bomb_graphic)
 
 func change_next_bomb_bar(value: int) -> void:
-	print(value)
+	#print(value)
 	next_bomb_bar.value = clampi(value, next_bomb_bar.min_value, next_bomb_bar.max_value)
 	overcharge_bar.value = clampi(value - 64, overcharge_bar.min_value, overcharge_bar.max_value)

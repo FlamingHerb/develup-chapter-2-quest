@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
+enum States {IDLE, MOVING, BOOSTING, SLOWDOWN}
+
 # Change score
 signal change_score_gui(value: int)
 
 # Change stamina
-signal change_stamina_gui(value: int)
+signal change_stamina_gui(value: float)
 
 # Emit 1 if adding, -1 if removing
 signal change_bomb_value_gui(value: int)
@@ -24,6 +26,7 @@ signal change_next_bomb_gui(value: int)
 
 @export var rate_of_fire: float = 0.4
 @export var expected_meteor_speed: float = 0.2
+@export var stamina_decay: float = 1
 
 var meteor_orbit_prefab = preload("res://scenes/player_orbit_follower.tscn")
 var actual_meteor_prefab = preload("res://scenes/meteor.tscn")
@@ -35,6 +38,27 @@ var bombs: int = 2:
 	set(value):
 		bombs = value
 		print("Current bomb count: ", bombs)
+
+var current_state: States = States.IDLE:
+	set(value):
+		current_state = value
+		match current_state:
+			States.IDLE:
+				print("Idle")
+			States.MOVING:
+				print("Moving")
+			States.BOOSTING:
+				print("Boosting")
+			States.SLOWDOWN:
+				print("Slowdown")
+
+
+var stamina: float = 100:
+	set(value):
+		stamina = clampf(value, 0, 100)
+		change_stamina_gui.emit(value)
+		
+
 
 # Placing it here to stop race condition.
 var score: int = 0:
@@ -63,18 +87,33 @@ func _ready() -> void:
 	# Arm the timer
 	hold_down_timer.paused = true
 	
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	#region Movement
 	if not reloading:
 		var input_direction = Input.get_vector("player_left", "player_right", "player_up", "player_down")
-		velocity = input_direction.normalized() * SPEED
+		var actual_speed = SPEED
+		if current_state == States.BOOSTING:
+			actual_speed *= 2
+			
+		elif current_state == States.SLOWDOWN:
+			actual_speed *= 0.5
+			
+		velocity = input_direction.normalized() * actual_speed
 		_shoot_item_loop()
 	else:
 		velocity = Vector2.ZERO
 	
-	if velocity != Vector2(0, 0):
+	# Stamina checking.
+	if current_state == States.IDLE or current_state == States.MOVING:
+		stamina += stamina_decay * delta
+	elif current_state == States.BOOSTING and velocity != Vector2.ZERO:
+		stamina -= stamina_decay * delta
+	elif current_state == States.SLOWDOWN:
+		stamina -= stamina_decay * delta * 2
+	
+	if velocity != Vector2.ZERO:
 		player_sprite.rotation = velocity.angle() - (PI/2)
 		engine_fire_sprite.visible = true
 	else:
@@ -84,6 +123,12 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _input(_event: InputEvent) -> void:
+	if not (current_state == States.BOOSTING or current_state == States.SLOWDOWN):
+		if Input.get_vector("player_left", "player_right", "player_up", "player_down") != Vector2.ZERO:
+			current_state = States.MOVING
+		else:
+			current_state = States.IDLE
+	
 	if Input.is_action_just_pressed("player_reload"):
 		hold_down_timer.paused = false
 		reload_animation.visible = true
@@ -102,6 +147,30 @@ func _input(_event: InputEvent) -> void:
 		else:
 			print("Bombs not available.")
 
+	#region Player Boosting
+	if Input.is_action_just_pressed("player_boost"):
+		if current_state != States.SLOWDOWN:
+			current_state = States.BOOSTING
+		
+	if Input.is_action_just_released("player_boost"):
+		if velocity != Vector2.ZERO:
+			current_state = States.MOVING
+		else: 
+			current_state = States.IDLE
+	#endregion Player Boosting
+	
+	#region Slowdown
+	if Input.is_action_just_pressed("player_time_control"):
+		if current_state != States.BOOSTING:
+			current_state = States.SLOWDOWN
+			
+	if Input.is_action_just_released("player_time_control"):
+		if velocity != Vector2.ZERO:
+			current_state = States.MOVING
+		else: 
+			current_state = States.IDLE
+	#endregion Slowdown
+	
 func _orbit_spawn_after_timeout() -> void:
 	# If children are already 10, don't bother reload.
 	var child_count = float(player_orbit.get_child_count())
@@ -117,7 +186,7 @@ func _orbit_spawn_after_timeout() -> void:
 	
 	#print("Spawning. Current Count: ", child_count)
 	
-	if child_count == 10:
+	if player_orbit.get_child_count() == 10:
 		reload_animation.modulate = full_reload_color
 
 # Reference: https://youtu.be/isA7P9ulBwE?si=SC0jZh4npf7n6H8E&t=576
