@@ -37,6 +37,7 @@ jobs:
               cd $PROJECT_PATH
               godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/game.exe"
           - name: Upload Artifact
+            id: upload_artifact
             uses: actions/upload-artifact@v4
             with:
               name: windows
@@ -48,7 +49,8 @@ jobs:
               token: ${{ secrets.GITHUB_TOKEN }}
               generateReleaseNotes: true
               tag: ${{ github.ref_name }}
-              artifacts: build/windows/*
+              artifacts: ${{ steps.upload_artifact.outputs }}
+              #artifacts: build/windows/*
 
     export-web:
         name: Web Export
