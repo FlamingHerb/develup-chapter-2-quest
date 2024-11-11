@@ -49,7 +49,7 @@ jobs:
               token: ${{ secrets.GITHUB_TOKEN }}
               generateReleaseNotes: true
               tag: ${{ github.ref_name }}
-              artifacts: ${{ steps.upload_artifact.outputs.artifact-url }}
+              artifacts: ${{ steps.upload_artifact.outputs.artifact-url }}/*
               #artifacts: build/windows/*
 
     export-web:
