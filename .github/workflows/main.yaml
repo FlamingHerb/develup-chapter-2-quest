@@ -43,14 +43,16 @@ jobs:
               name: windows
               path: build/windows
 
+          - name: Zipping for Release
+            run: zip -r -q windows.zip build/windows
+
           - name: Creating Release
             uses: ncipollo/release-action@v1.14.0
             with:
               token: ${{ secrets.GITHUB_TOKEN }}
               generateReleaseNotes: true
               tag: ${{ github.ref_name }}
-              artifacts: ${{ steps.upload_artifact.outputs.artifact-url }}/*.zip
-              #artifacts: build/windows/*
+              artifacts: windows.zip
 
     export-web:
         name: Web Export
