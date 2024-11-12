@@ -22,6 +22,13 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("player_f11"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
 func _reset_game() -> void:
 	player_ship.position = Vector2(960, 540)
 	player_ship.reset_game()

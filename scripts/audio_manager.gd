@@ -116,10 +116,8 @@ func play_level_bgm() -> void:
 func stop_level_bgm() -> void:
 	level_music.stop()
 
+func pause_game() -> void:
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, true)
 
-func dizzy_changer(value: bool):
-	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGS"), 0, value)
-	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("SFX"), 0, value)
-	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, value)
-	
-	
+func resume_game() -> void:
+	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, false)
