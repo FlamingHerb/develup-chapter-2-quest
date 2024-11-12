@@ -4,6 +4,7 @@
 extends Node
 
 @onready var background_music = %BGM
+@onready var level_music = %BGMRandom
 @onready var background_sound = %BGS
 @onready var sound_effect_queue = $SFX
 
@@ -108,6 +109,12 @@ func sfx_stop_all():
 func _sfx_free(sfx_node):
 	sfx_node.queue_free()
 #endregion
+
+func play_level_bgm() -> void:
+	level_music.play()
+
+func stop_level_bgm() -> void:
+	level_music.stop()
 
 
 func dizzy_changer(value: bool):

@@ -68,11 +68,15 @@ func reset_game() -> void:
 	print("Resetting UI.")
 
 func _on_restart_button_pressed() -> void:
-	restart_game.emit()
 	restart_panel.visible = false
-	reset_game()
+	_reset_functions()
 
 func _on_new_game_button_pressed() -> void:
-	restart_game.emit()
 	start_game_panel.visible = false
+	_reset_functions()
+
+func _reset_functions() -> void:
+	AudioManager.sfx_stop_all()
+	AudioManager.play_level_bgm()
+	restart_game.emit()
 	reset_game()

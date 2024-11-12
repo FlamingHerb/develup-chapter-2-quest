@@ -332,11 +332,13 @@ func _player_got_hit() -> void:
 	
 	print("Player hit! Game over!")
 
+## When the game tells us that everything should be annihilated.
 func _on_game_over_timer_timeout() -> void:
 	#_reset_game()
 	get_tree().call_group("Meteor", "queue_free")
 	visible = false
 	game_over_occured.emit()
+	AudioManager.stop_level_bgm()
 	print("Times out, time to die!")
 
 func reset_game():

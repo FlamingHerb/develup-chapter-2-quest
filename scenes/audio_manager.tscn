@@ -1,14 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqre1d7efrq45"]
+[gd_scene load_steps=6 format=3 uid="uid://cqre1d7efrq45"]
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_fowy0"]
+[ext_resource type="AudioStream" uid="uid://dhld87mvdumqv" path="res://audio/bgm/juhani_bgm_1.ogg" id="2_4gt5g"]
+[ext_resource type="AudioStream" uid="uid://bvg0n6bhmbfid" path="res://audio/bgm/juhani_bgm_2.ogg" id="3_uk58f"]
+[ext_resource type="AudioStream" uid="uid://bq3cbo5fnm0w0" path="res://audio/bgm/juhani_bgm_3.ogg" id="4_01r21"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_8tfrk"]
+shuffle = true
+stream_count = 3
+stream_0 = ExtResource("2_4gt5g")
+stream_1 = ExtResource("3_uk58f")
+stream_2 = ExtResource("4_01r21")
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_fowy0")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"BGM"
+
+[node name="BGMRandom" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamPlaylist_8tfrk")
+bus = &"BGM"
 
 [node name="BGS" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+bus = &"BGS"
 
 [node name="SFX" type="Node" parent="."]

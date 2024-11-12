@@ -5,6 +5,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AudioManager.sfx_play("res://audio/bgm/juhani_title_screen.ogg")
 	
 	player_ship.change_score_gui.connect(general_ui.change_score)
 	player_ship.change_stamina_gui.connect(general_ui.change_stamina_bar)
