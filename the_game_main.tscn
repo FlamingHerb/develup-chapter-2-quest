@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=36 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://bpg0q5imgnmvl" path="res://graphics/gui/bar_square_blue.png" id="21_ekm1d"]
 [ext_resource type="Texture2D" uid="uid://dpl2k7alykla8" path="res://graphics/gui/metalPanel_blue.png" id="21_s3m6q"]
 [ext_resource type="Texture2D" uid="uid://buckamsbplidh" path="res://graphics/gui/bar_bomb_overcharge.png" id="22_py7ja"]
+[ext_resource type="Theme" uid="uid://cxy0y40lb1o0r" path="res://themes/buttom_default.tres" id="26_xjcso"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
 bounce = 1.0
@@ -96,7 +97,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2jasm"]
-radius = 6.0
+radius = 4.0
 
 [sub_resource type="Curve2D" id="Curve2D_m0dgu"]
 _data = {
@@ -427,6 +428,39 @@ max_value = 64.0
 texture_progress = ExtResource("22_py7ja")
 metadata/_edit_lock_ = true
 
+[node name="RestartPanel" type="Control" parent="UIStuff"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -512.0
+offset_right = 512.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="RestartButton" type="Button" parent="UIStuff/RestartPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.5
+offset_top = -65.5
+offset_right = 195.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("26_xjcso")
+text = "RESTART?"
+
 [connection signal="timeout" from="PlayerBody/HoldDownTimer" to="PlayerBody" method="_orbit_spawn_after_timeout"]
 [connection signal="timeout" from="PlayerBody/GameOverTimer" to="PlayerBody" method="_on_game_over_timer_timeout"]
 [connection signal="child_entered_tree" from="AsteroidGroup" to="PlayerBody" method="_on_asteroid_group_child_entered_tree"]
+[connection signal="pressed" from="UIStuff/RestartPanel/RestartButton" to="UIStuff" method="_on_restart_button_pressed"]

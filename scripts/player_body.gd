@@ -15,7 +15,9 @@ signal change_bomb_value_gui(value: int)
 signal change_next_bomb_gui(value: int)
 
 # Tell entire game to reset.
-signal reset_game()
+# signal reset_game()
+
+signal game_over_occured()
 
 @onready var player_sprite = $PlayerSprite
 @onready var engine_fire_sprite = $PlayerSprite/EngineFire
@@ -35,15 +37,14 @@ signal reset_game()
 
 var meteor_orbit_prefab = preload("res://scenes/player_orbit_follower.tscn")
 var actual_meteor_prefab = preload("res://scenes/meteor.tscn")
-var can_fire = true
-var reloading = false
+var can_fire: bool = true
+var reloading: bool = false
 
 # Remember, crucial.
 var bombs: int = 2:
 	set(value):
 		bombs = value
 		print("Current bomb count: ", bombs)
-
 var current_state: States = States.IDLE:
 	set(value):
 		current_state = value
@@ -56,15 +57,10 @@ var current_state: States = States.IDLE:
 				print("Boosting")
 			States.SLOWDOWN:
 				print("Slowdown")
-
-
 var stamina: float = 100:
 	set(value):
 		stamina = clampf(value, 0, 100)
 		change_stamina_gui.emit(value)
-		
-
-
 # Placing it here to stop race condition.
 var score: int = 0:
 	get:
@@ -72,17 +68,14 @@ var score: int = 0:
 	set(value):
 		score = value
 		change_score_gui.emit(value)
-
 var meteor_graphics = [
 	preload("res://graphics/meteor/meteorbrown_big1.png"),
 	preload("res://graphics/meteor/meteorbrown_big2.png"),
 	preload("res://graphics/meteor/meteorbrown_big3.png"),
 	preload("res://graphics/meteor/meteorbrown_big4.png"),
 ]
-
 const SPEED = 200.0
 const ROTATION_SPEED = 2
-
 
 #===============================================================================
 # Functions
@@ -340,8 +333,24 @@ func _player_got_hit() -> void:
 	print("Player hit! Game over!")
 
 func _on_game_over_timer_timeout() -> void:
-	_reset_game()
+	#_reset_game()
+	get_tree().call_group("Meteor", "queue_free")
+	visible = false
+	game_over_occured.emit()
 	print("Times out, time to die!")
 
-func _reset_game():
-	reset_game.emit()
+func reset_game():
+	bombs = 2
+	current_state = States.IDLE
+	stamina = 100
+	score = 0
+	can_fire = true
+	reloading = false
+	
+	# Removes pre-existing player projectiles.
+	get_tree().call_group("player_projectiles", "queue_free")
+	
+	visible = true
+	
+	
+	#reset_game.emit()

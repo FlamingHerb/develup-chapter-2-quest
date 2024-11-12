@@ -2,5 +2,5 @@
 
 [ext_resource type="Texture2D" uid="uid://cgp0r3duyvbtv" path="res://graphics/gui/powerupBlue_bolt.png" id="1_nfrqb"]
 
-[node name="Bomb1" type="TextureRect"]
+[node name="Bomb1" type="TextureRect" groups=["bomb_graphic"]]
 texture = ExtResource("1_nfrqb")

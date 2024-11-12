@@ -5,11 +5,15 @@ extends CanvasLayer
 #signal change_bomb_count(value: int)
 #signal change_next_bomb_count(value: int)
 
+signal restart_game()
+
 @onready var score_text = $RightSide/ScorePanel/ScoreText
 @onready var stamina_bar = $RightSide/StaminaPanel/StaminaBar
 @onready var bomb_container = $RightSide/BombPanel/BombContainer
 @onready var next_bomb_bar = $RightSide/NextBombPanel/NextBombBar
 @onready var overcharge_bar = $RightSide/NextBombPanel/OverChargeBar
+
+@onready var restart_panel = $RestartPanel
 
 var texture_rect_ref = preload("res://scenes/bomb_graphic.tscn")
 
@@ -47,5 +51,22 @@ func change_next_bomb_bar(value: int) -> void:
 	next_bomb_bar.value = clampi(value, next_bomb_bar.min_value, next_bomb_bar.max_value)
 	overcharge_bar.value = clampi(value - 64, overcharge_bar.min_value, overcharge_bar.max_value)
 
+func game_over_occured() -> void:
+	restart_panel.visible = true
+
 func reset_game() -> void:
+	change_score(0)
+	change_stamina_bar(100)
+	
+	get_tree().call_group("bomb_graphic", "queue_free")
+	_add_bomb_graphic()
+	_add_bomb_graphic()
+	
+	change_next_bomb_bar(0)
+	
 	print("Resetting UI.")
+
+func _on_restart_button_pressed() -> void:
+	restart_game.emit()
+	restart_panel.visible = false
+	reset_game()

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/player_orbit_follower.gd" id="1_jernu"]
 [ext_resource type="Texture2D" uid="uid://cw4w8biu3em5e" path="res://graphics/meteor/meteorbrown_big1.png" id="1_vtm56"]
 
-[node name="OrbitFollower" type="PathFollow2D"]
+[node name="OrbitFollower" type="PathFollow2D" groups=["player_projectiles"]]
 rotation = -3.13482
 script = ExtResource("1_jernu")
 
