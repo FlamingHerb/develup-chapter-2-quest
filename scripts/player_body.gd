@@ -45,7 +45,7 @@ var bombs: int = 2:
 	set(value):
 		bombs = value
 		print("Current bomb count: ", bombs)
-var current_state: States = States.IDLE:
+var current_state: States = States.GAMEOVER:
 	set(value):
 		current_state = value
 		match current_state:

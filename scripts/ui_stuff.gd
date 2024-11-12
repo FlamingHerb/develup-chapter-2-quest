@@ -13,6 +13,7 @@ signal restart_game()
 @onready var next_bomb_bar = $RightSide/NextBombPanel/NextBombBar
 @onready var overcharge_bar = $RightSide/NextBombPanel/OverChargeBar
 
+@onready var start_game_panel = $StartGame
 @onready var restart_panel = $RestartPanel
 
 var texture_rect_ref = preload("res://scenes/bomb_graphic.tscn")
@@ -69,4 +70,9 @@ func reset_game() -> void:
 func _on_restart_button_pressed() -> void:
 	restart_game.emit()
 	restart_panel.visible = false
+	reset_game()
+
+func _on_new_game_button_pressed() -> void:
+	restart_game.emit()
+	start_game_panel.visible = false
 	reset_game()
