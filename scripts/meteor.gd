@@ -25,7 +25,7 @@ var meteor_bounce_sfx = [
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	known_constant_velocity = velocity
-	print(velocity.length())
+	#print(velocity.length())
 	_rotate_speed_sprite()
 	meteor_sprite_ref.texture = meteor_sprite
 	

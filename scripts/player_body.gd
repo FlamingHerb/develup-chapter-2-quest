@@ -45,6 +45,9 @@ var bombs: int = 2:
 	set(value):
 		bombs = value
 		print("Current bomb count: ", bombs)
+var bombs_detonated: int = 0:
+	set(value):
+		print("Current difficulty: ", bombs_detonated)
 var current_state: States = States.GAMEOVER:
 	set(value):
 		current_state = value
@@ -170,6 +173,7 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("player_bomb"):
 		if bombs != 0:
+			bombs_detonated += 1
 			_bomb_function(-1)
 		else:
 			AudioManager.sfx_play(bomb_error)
@@ -235,8 +239,11 @@ func _shoot_item_loop() -> void:
 		new_projectile.speed_factor = 1.0 if current_state != States.SLOWDOWN else 0.5
 		# Set meteor graphics to match with orbiting one.
 		new_projectile.meteor_sprite = meteor_reference.meteor_sprite
+		# Set trajectory speed according to bombs detonated. Expected true game over sequence around
+		# 20+ bombs detonated.
+		var speed_projection_difficulty = randf_range(expected_meteor_speed, expected_meteor_speed + 0.02) - (bombs_detonated * 0.005)
 		# Prepare it to where it should be firing towards.
-		new_projectile.velocity = (new_projectile.position - position) / randf_range(expected_meteor_speed, expected_meteor_speed + 0.02)
+		new_projectile.velocity = (new_projectile.position - position) / speed_projection_difficulty
 		
 		# Connect signal to proper function spawner
 		new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
@@ -361,6 +368,7 @@ func _on_game_over_timer_timeout() -> void:
 
 func reset_game():
 	bombs = 2
+	bombs_detonated = 0
 	current_state = States.IDLE
 	stamina = 100
 	score = 0
