@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
-[ext_resource type="Texture2D" uid="uid://bqysvymc37xjg" path="res://graphics/spaceship_parts/playership1_blue.png" id="2_wgf0d"]
 [ext_resource type="Script" path="res://scripts/player_body.gd" id="3_6f0q0"]
+[ext_resource type="Texture2D" uid="uid://dxrsvv6lcpd8b" path="res://graphics/spaceship_parts/playership1_red.png" id="4_b70w8"]
 [ext_resource type="Texture2D" uid="uid://ciq23gpd0p816" path="res://graphics/spaceship_parts/fire02.png" id="6_n3ii6"]
 [ext_resource type="Texture2D" uid="uid://cmsk66txox132" path="res://graphics/spaceship_parts/fire03.png" id="7_tqw60"]
 [ext_resource type="Texture2D" uid="uid://dn62gsdev1ddk" path="res://graphics/spaceship_parts/fire01.png" id="9_5yifa"]
@@ -200,7 +200,7 @@ metadata/_edit_lock_ = true
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerBody"]
 z_index = 1
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_wgf0d")
+texture = ExtResource("4_b70w8")
 flip_v = true
 
 [node name="EngineFire" type="AnimatedSprite2D" parent="PlayerBody/PlayerSprite"]
