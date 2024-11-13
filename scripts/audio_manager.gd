@@ -7,7 +7,8 @@ extends Node
 @onready var level_music = %BGMRandom
 @onready var background_sound = %BGS
 @onready var sound_effect_queue = $SFX
-
+@onready var reload_sound = %ReloadSound
+@onready var slowdown_sound = %SlowDownSound
 
 
 # Called when the node enters the scene tree for the first time.
@@ -117,6 +118,18 @@ func play_level_bgm() -> void:
 
 func stop_level_bgm() -> void:
 	level_music.stop()
+
+func play_reload_sfx() -> void:
+	reload_sound.play()
+
+func stop_reload_sfx() -> void:
+	reload_sound.stop()
+
+func play_slowdown_sfx() -> void:
+	slowdown_sound.play()
+
+func stop_slowdown_sfx() -> void:
+	slowdown_sound.stop()
 
 func pause_game() -> void:
 	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, true)

@@ -94,6 +94,12 @@ var player_bomb_obtained = preload("res://audio/sfx/player_ship/sfx_sounds_power
 
 var bullet_warning_for_full_bomb = preload("res://audio/sfx/player_ship/sfx_lowhealth_alarmloop3.wav")
 
+var shoot_sfx = [
+	preload("res://audio/sfx/player_ship/sfx_wpn_laser8.wav"),
+	preload("res://audio/sfx/player_ship/sfx_wpn_laser9.wav"),
+	preload("res://audio/sfx/player_ship/sfx_wpn_laser10.wav")
+]
+
 const SPEED = 150.0
 const ROTATION_SPEED = 2
 
@@ -162,12 +168,15 @@ func _input(_event: InputEvent) -> void:
 			current_state = States.IDLE
 	
 	if Input.is_action_just_pressed("player_reload"):
+		AudioManager.play_reload_sfx()
 		hold_down_timer.paused = false
 		reload_animation.visible = true
 		reloading = true
+		
 		#print("Reloading")
 		
 	if Input.is_action_just_released("player_reload"):
+		AudioManager.stop_reload_sfx()
 		hold_down_timer.paused = true
 		reload_animation.visible = false
 		reloading = false
@@ -193,10 +202,12 @@ func _input(_event: InputEvent) -> void:
 	#region Slowdown
 	if Input.is_action_just_pressed("player_time_control") and stamina > 10:
 		if current_state != States.BOOSTING:
+			AudioManager.play_slowdown_sfx()
 			get_tree().call_group("Meteor", "change_speed_factor", 0.5)
 			current_state = States.SLOWDOWN
 			
 	if Input.is_action_just_released("player_time_control"):
+		AudioManager.stop_slowdown_sfx()
 		#get_tree().call_group("Meteor", "change_speed_factor", 1)
 		_force_back_to_idle_moving()
 	#endregion Slowdown
@@ -224,6 +235,9 @@ func _shoot_item_loop() -> void:
 	if Input.is_action_pressed("player_shoot") and can_fire == true:
 		# Stops function if there are no available things to fire.
 		if player_orbit.get_child_count() == 0: return
+		
+		# Fire ammo.
+		AudioManager.sfx_play(shoot_sfx.pick_random())
 		
 		# Disallow firing until done.
 		can_fire = false
