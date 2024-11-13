@@ -85,6 +85,10 @@ var bomb_sfx = [
 
 var bomb_error = preload("res://audio/sfx/bomb/sfx_sounds_error1.wav")
 
+var stamina_low = preload("res://audio/sfx/player_ship/sfx_sound_shutdown1.wav")
+
+var player_bomb_obtained = preload("res://audio/sfx/player_ship/sfx_sounds_powerup18.wav")
+
 const SPEED = 125.0
 const ROTATION_SPEED = 2
 
@@ -100,6 +104,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if stamina <= 0:
+		AudioManager.sfx_play(stamina_low)
 		_force_back_to_idle_moving()
 	
 	#region Movement
@@ -165,7 +170,6 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("player_bomb"):
 		if bombs != 0:
-			AudioManager.sfx_play(bomb_sfx.pick_random())
 			_bomb_function(-1)
 		else:
 			AudioManager.sfx_play(bomb_error)
@@ -297,9 +301,11 @@ func _bomb_function(value: int) -> void:
 			if bombs > 1: 
 				print("Bombs are full.")
 				return
+			AudioManager.sfx_play(player_bomb_obtained)
 			bombs += 1
 			change_bomb_value_gui.emit(1)
 		-1:
+			AudioManager.sfx_play(bomb_sfx.pick_random())
 			# Technically, will not run when bombs are 0. Done by input.
 			bombs -= 1
 			
