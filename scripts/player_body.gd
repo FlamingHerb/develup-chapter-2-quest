@@ -92,6 +92,8 @@ var stamina_low = preload("res://audio/sfx/player_ship/sfx_sound_shutdown1.wav")
 
 var player_bomb_obtained = preload("res://audio/sfx/player_ship/sfx_sounds_powerup18.wav")
 
+var bullet_warning_for_full_bomb = preload("res://audio/sfx/player_ship/sfx_lowhealth_alarmloop3.wav")
+
 const SPEED = 150.0
 const ROTATION_SPEED = 2
 
@@ -305,6 +307,7 @@ func _bomb_function(value: int) -> void:
 		1:
 			# Do not add if bombs are already at 2.
 			if bombs > 1: 
+				AudioManager.sfx_play(bullet_warning_for_full_bomb)
 				print("Bombs are full.")
 				return
 			AudioManager.sfx_play(player_bomb_obtained)
