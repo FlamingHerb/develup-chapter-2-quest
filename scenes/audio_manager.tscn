@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqre1d7efrq45"]
+[gd_scene load_steps=9 format=3 uid="uid://cqre1d7efrq45"]
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_fowy0"]
 [ext_resource type="AudioStream" uid="uid://dhld87mvdumqv" path="res://audio/bgm/juhani_bgm_1.ogg" id="2_4gt5g"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bq3cbo5fnm0w0" path="res://audio/bgm/juhani_bgm_3.ogg" id="4_01r21"]
 [ext_resource type="AudioStream" uid="uid://cd1nyrtjdqfuh" path="res://audio/sfx/player_ship/sfx_sound_poweron.wav" id="5_sm7ex"]
 [ext_resource type="AudioStream" uid="uid://diyrdvykoygpq" path="res://audio/sfx/player_ship/sfx_sound_vaporizing.wav" id="6_1ko5g"]
+[ext_resource type="AudioStream" uid="uid://dcx85t40fqa2a" path="res://audio/sfx/player_ship/sfx_sounds_powerup1.wav" id="7_wnp8c"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_8tfrk"]
 shuffle = true
@@ -39,6 +40,11 @@ bus = &"BGS"
 [node name="SlowDownSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_1ko5g")
+bus = &"SFX"
+
+[node name="SpeedUpSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_wnp8c")
 bus = &"SFX"
 
 [node name="SFX" type="Node" parent="."]

@@ -9,7 +9,7 @@ extends Node
 @onready var sound_effect_queue = $SFX
 @onready var reload_sound = %ReloadSound
 @onready var slowdown_sound = %SlowDownSound
-
+@onready var speedup_sound = %SpeedUpSound
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -130,6 +130,12 @@ func play_slowdown_sfx() -> void:
 
 func stop_slowdown_sfx() -> void:
 	slowdown_sound.stop()
+
+func play_speedup_sfx() -> void:
+	speedup_sound.play()
+
+func stop_speedup_sfx() -> void:
+	speedup_sound.stop()
 
 func pause_game() -> void:
 	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, true)

@@ -193,9 +193,11 @@ func _input(_event: InputEvent) -> void:
 	#region Player Boosting
 	if Input.is_action_just_pressed("player_boost") and stamina > 10:
 		if current_state != States.SLOWDOWN:
+			AudioManager.play_speedup_sfx()
 			current_state = States.BOOSTING
 		
 	if Input.is_action_just_released("player_boost"):
+		AudioManager.stop_speedup_sfx()
 		_force_back_to_idle_moving()
 	#endregion Player Boosting
 	
