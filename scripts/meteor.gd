@@ -12,6 +12,20 @@ signal will_spawn_meteor(body_reference: CharacterBody2D)
 signal player_hit()
 
 var meteor_sprite: CompressedTexture2D
+
+var meteor_bounce_sfx = [
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit1.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit2.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit3.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit4.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit5.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit6.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit7.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit8.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit9.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit10.wav")
+]
+
 @onready var meteor_sprite_ref = $Sprite
 @onready var speed_sprite = $SpeedSprite
 
@@ -26,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	meteor_sprite_ref.rotation += rotation_speed * delta * speed_factor
 	var collision_info = move_and_collide(velocity * delta * speed_factor)
 	if collision_info:
-		
+		AudioManager.sfx_play(meteor_bounce_sfx.pick_random())
 		
 		if collision_info.get_collider().name == player_reference.name:
 			player_hit.emit()
