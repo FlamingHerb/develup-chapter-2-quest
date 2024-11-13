@@ -48,15 +48,15 @@ var bombs: int = 2:
 var current_state: States = States.GAMEOVER:
 	set(value):
 		current_state = value
-		match current_state:
-			States.IDLE:
-				print("Idle")
-			States.MOVING:
-				print("Moving")
-			States.BOOSTING:
-				print("Boosting")
-			States.SLOWDOWN:
-				print("Slowdown")
+		#match current_state:
+			#States.IDLE:
+				#print("Idle")
+			#States.MOVING:
+				#print("Moving")
+			#States.BOOSTING:
+				#print("Boosting")
+			#States.SLOWDOWN:
+				#print("Slowdown")
 var stamina: float = 100:
 	set(value):
 		stamina = clampf(value, 0, 100)

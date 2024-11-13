@@ -5,16 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://v5tbtm428m0h" path="res://graphics/meteor/speed.png" id="3_o0h6v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nisio"]
-radius = 4.0
+radius = 3.0
 
 [node name="Meteor" type="CharacterBody2D" groups=["Meteor"]]
 collision_layer = 0
 collision_priority = 2.0
 motion_mode = 1
 script = ExtResource("1_a64fa")
-
-[node name="PrimaryHitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_nisio")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
@@ -24,3 +21,6 @@ texture = ExtResource("2_mpe4d")
 scale = Vector2(1, 0.342593)
 texture = ExtResource("3_o0h6v")
 offset = Vector2(0, -43)
+
+[node name="PrimaryHitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nisio")
