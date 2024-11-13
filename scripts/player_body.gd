@@ -283,14 +283,13 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 
 func _on_asteroid_group_child_entered_tree(_node: Node) -> void:
 	#print(asteroid_group.get_child_count())
-	
-	change_next_bomb_gui.emit(asteroid_group.get_child_count())
-	
 	# Will only add score WHEN player is alive!
-	if not current_state == States.GAMEOVER: score += 1
+	if not current_state == States.GAMEOVER: 
+		change_next_bomb_gui.emit(asteroid_group.get_child_count())
+		score += 1
 	
-	if asteroid_group.get_child_count() % 64 == 0 and asteroid_group.get_child_count() > 0:
-		_bomb_function(1)
+		if asteroid_group.get_child_count() % 64 == 0 and asteroid_group.get_child_count() > 0:
+			_bomb_function(1)
 
 ## 1 for add
 ## -1 for remove
