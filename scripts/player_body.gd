@@ -74,7 +74,18 @@ var meteor_graphics = [
 	preload("res://graphics/meteor/meteorbrown_big3.png"),
 	preload("res://graphics/meteor/meteorbrown_big4.png"),
 ]
-const SPEED = 200.0
+
+# Sounds
+
+var bomb_sfx = [
+	preload("res://audio/sfx/bomb/sfx_exp_odd1.wav"),
+	preload("res://audio/sfx/bomb/sfx_exp_odd3.wav"),
+	preload("res://audio/sfx/bomb/sfx_exp_odd5.wav")
+]
+
+var bomb_error = preload("res://audio/sfx/bomb/sfx_sounds_error1.wav")
+
+const SPEED = 125.0
 const ROTATION_SPEED = 2
 
 #===============================================================================
@@ -154,8 +165,10 @@ func _input(_event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("player_bomb"):
 		if bombs != 0:
+			AudioManager.sfx_play(bomb_sfx.pick_random())
 			_bomb_function(-1)
 		else:
+			AudioManager.sfx_play(bomb_error)
 			print("Bombs not available.")
 
 	#region Player Boosting

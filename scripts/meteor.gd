@@ -14,16 +14,9 @@ signal player_hit()
 var meteor_sprite: CompressedTexture2D
 
 var meteor_bounce_sfx = [
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit1.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit2.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit3.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit4.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit5.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit6.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit7.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit8.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit9.wav"),
-	preload("res://audio/sfx/meteor_bounce/sfx_damage_hit10.wav")
+	preload("res://audio/sfx/meteor_bounce/sfx_sounds_impact1.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_sounds_impact3.wav"),
+	preload("res://audio/sfx/meteor_bounce/sfx_sounds_impact4.wav"),
 ]
 
 @onready var meteor_sprite_ref = $Sprite
@@ -47,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			if game_over_on == true: queue_free()
 		
 		# Decide whether it will bounce towards player or not.
-		if not randf_range(0, 1) > 0.8: 
+		if not randf_range(0, 1) > 0.69: 
 			velocity = velocity.bounce(collision_info.get_normal())
 		else:
 			if game_over_on == false: _apply_force_towards_player()
