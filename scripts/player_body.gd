@@ -89,7 +89,7 @@ var stamina_low = preload("res://audio/sfx/player_ship/sfx_sound_shutdown1.wav")
 
 var player_bomb_obtained = preload("res://audio/sfx/player_ship/sfx_sounds_powerup18.wav")
 
-const SPEED = 125.0
+const SPEED = 150.0
 const ROTATION_SPEED = 2
 
 #===============================================================================
@@ -236,7 +236,7 @@ func _shoot_item_loop() -> void:
 		# Set meteor graphics to match with orbiting one.
 		new_projectile.meteor_sprite = meteor_reference.meteor_sprite
 		# Prepare it to where it should be firing towards.
-		new_projectile.velocity = (new_projectile.position - position) / expected_meteor_speed
+		new_projectile.velocity = (new_projectile.position - position) / randf_range(expected_meteor_speed, expected_meteor_speed + 0.02)
 		
 		# Connect signal to proper function spawner
 		new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
