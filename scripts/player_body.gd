@@ -284,6 +284,8 @@ func _shoot_item_loop() -> void:
 		# Connect signal to proper function spawner
 		new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
 		new_projectile.player_hit.connect(_player_got_hit)
+		new_projectile.close_call.connect(_close_call_detected)
+		
 		
 		# Add new projectile
 		asteroid_group.add_child(new_projectile)
@@ -318,7 +320,7 @@ func _meteor_spawn_from_bounces(body_ref: CharacterBody2D) -> void:
 	# Connect signal to proper function spawner
 	new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
 	new_projectile.player_hit.connect(_player_got_hit)
-	
+	new_projectile.close_call.connect(_close_call_detected)
 
 	
 	# Add new projectile
@@ -420,6 +422,9 @@ func reset_game():
 	
 	visible = true
 	#reset_game.emit()
+
+func _close_call_detected():
+	print("Close call detected! Plus points!")
 
 func game_got_paused() -> void:
 	pass

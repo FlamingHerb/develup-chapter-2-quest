@@ -1,15 +1,20 @@
 extends CharacterBody2D
 
+@onready var ray_cast = $RayCast2D
+
 var player_reference: CharacterBody2D
 var speed_factor: float
 var known_constant_velocity: Vector2
 var rotation_speed: float = 2
 var game_over_on: bool = false
+var close_call_detected: bool = false
 
 var bounces: int = 0
 var can_spawn_meteor: bool = false
+
 signal will_spawn_meteor(body_reference: CharacterBody2D)
 signal player_hit()
+signal close_call()
 
 var meteor_sprite: CompressedTexture2D
 
@@ -33,6 +38,7 @@ func _physics_process(delta: float) -> void:
 	meteor_sprite_ref.rotation += rotation_speed * delta * speed_factor
 	var collision_info = move_and_collide(velocity * delta * speed_factor)
 	if collision_info:
+		#print(collision_info.get_collider_shape())
 		AudioManager.sfx_play(meteor_bounce_sfx.pick_random())
 		
 		if collision_info.get_collider().name == player_reference.name:
@@ -58,9 +64,23 @@ func _physics_process(delta: float) -> void:
 			if randf_range(0, 1) > 0.75:
 				can_spawn_meteor = true
 				meteor_sprite_ref.modulate = Color(1.5, 0, 0)
-		
+	
 	_rotate_speed_sprite()
-		
+	
+	# Only detect close calls if it's not a game over.
+	if not game_over_on:
+		ray_cast.target_position = player_reference.global_position - ray_cast.global_position
+		if close_call_detected:
+			if ray_cast.target_position.length() > 50.0:
+				#print(ray_cast.target_position.length())
+				close_call.emit()
+				close_call_detected = false
+		else:
+			if ray_cast.target_position.length() < 20.0:
+				#print(ray_cast.target_position.length())
+				close_call_detected = true
+	
+	
 func _apply_force_towards_player() -> void:
 	var distance_to_player = global_position.distance_to(player_reference.global_position)
 	var new_time = distance_to_player / known_constant_velocity.length()

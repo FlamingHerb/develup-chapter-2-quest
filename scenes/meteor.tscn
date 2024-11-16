@@ -24,3 +24,8 @@ offset = Vector2(0, -43)
 
 [node name="PrimaryHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nisio")
+debug_color = Color(0.967613, 0, 0.473147, 0.42)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+collide_with_bodies = false
