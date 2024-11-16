@@ -73,7 +73,7 @@ func change_next_bomb_bar(value: int) -> void:
 		next_bomb_panel.add_theme_stylebox_override("panel", next_bomb_grey_pref)
 	elif value >= 64 and value < 128:
 		next_bomb_panel.add_theme_stylebox_override("panel", next_bomb_blue_pref)
-	elif value <= 128:
+	elif value >= 128:
 		next_bomb_panel.add_theme_stylebox_override("panel", next_bomb_gold_pref)
 	else:
 		next_bomb_panel.add_theme_stylebox_override("panel", next_bomb_grey_pref)
