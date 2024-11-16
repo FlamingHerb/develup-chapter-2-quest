@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dqj53ukikr4vd"]
+
+[ext_resource type="FontFile" uid="uid://dhgmmhbd8dhij" path="res://fonts/kenney_space.ttf" id="1_iqcql"]
+
+[resource]
+font = ExtResource("1_iqcql")
+font_size = 28
+shadow_size = 2
+shadow_color = Color(0.325441, 0.325441, 0.325441, 1)
+shadow_offset = Vector2(4, 2)

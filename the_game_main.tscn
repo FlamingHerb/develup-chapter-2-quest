@@ -200,7 +200,7 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("3_6f0q0")
-expected_meteor_speed = 0.06
+expected_meteor_speed = 0.1
 metadata/_edit_lock_ = true
 
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerBody"]
@@ -444,6 +444,14 @@ scale = Vector2(0.95, 0.65)
 max_value = 64.0
 texture_progress = ExtResource("22_py7ja")
 metadata/_edit_lock_ = true
+
+[node name="NotifGrouping" type="Control" parent="UIStuff/RightSide"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="RestartPanel" type="Control" parent="UIStuff"]
 visible = false

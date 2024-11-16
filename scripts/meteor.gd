@@ -76,7 +76,7 @@ func _physics_process(delta: float) -> void:
 				close_call.emit()
 				close_call_detected = false
 		else:
-			if ray_cast.target_position.length() < 20.0:
+			if ray_cast.target_position.length() < 18.0:
 				#print(ray_cast.target_position.length())
 				close_call_detected = true
 	
@@ -102,4 +102,5 @@ func change_speed_factor(value: float) -> void:
 
 func game_over_sequence() -> void:
 	change_speed_factor(0.5)
+	close_call_detected = false
 	game_over_on = true

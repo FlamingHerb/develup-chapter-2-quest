@@ -1,0 +1,228 @@
+[gd_scene load_steps=10 format=3 uid="uid://b8mo21kj2omf6"]
+
+[ext_resource type="StyleBox" uid="uid://beqkaow0tv0e6" path="res://themes/ui_notif_panel.tres" id="1_i3ji4"]
+[ext_resource type="Script" path="res://scripts/ui_notif_panel.gd" id="2_uqq3d"]
+[ext_resource type="FontFile" uid="uid://dhgmmhbd8dhij" path="res://fonts/kenney_space.ttf" id="3_kf6ee"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vvgsa"]
+font = ExtResource("3_kf6ee")
+font_size = 32
+font_color = Color(1, 0, 0, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(4, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bgsas"]
+font = ExtResource("3_kf6ee")
+font_size = 32
+font_color = Color(1, 1, 0, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(4, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uot6i"]
+font = ExtResource("3_kf6ee")
+font_size = 28
+font_color = Color(1, 0.27451, 0, 1)
+shadow_size = 2
+shadow_color = Color(0.369314, 0.0775266, 0, 1)
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1rnkq"]
+font = ExtResource("3_kf6ee")
+font_size = 20
+font_color = Color(1, 1, 0, 1)
+shadow_size = 2
+shadow_color = Color(0.65098, 0.486275, 0, 1)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d5l81"]
+font = ExtResource("3_kf6ee")
+font_size = 28
+font_color = Color(1, 0.101961, 0, 1)
+shadow_size = 2
+shadow_color = Color(0.369314, 0.0775266, 0, 1)
+shadow_offset = Vector2(4, -4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sgwrh"]
+font = ExtResource("3_kf6ee")
+font_size = 18
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="UINotifPanel" type="Panel"]
+texture_filter = 1
+offset_left = 22.0
+offset_top = 704.0
+offset_right = 222.0
+offset_bottom = 864.0
+scale = Vector2(1.85, 1.85)
+theme_override_styles/panel = ExtResource("1_i3ji4")
+script = ExtResource("2_uqq3d")
+metadata/_edit_lock_ = true
+
+[node name="BombAvailable" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="BombAvailable"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.9189
+offset_top = -34.6891
+offset_right = 301.081
+offset_bottom = 96.3109
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "BOMB
+AVAILABLE"
+label_settings = SubResource("LabelSettings_vvgsa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BombsFull" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="BombsFull"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.9189
+offset_top = -38.2973
+offset_right = 301.081
+offset_bottom = 123.703
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "BOMB
+SLOTS
+FULL"
+label_settings = SubResource("LabelSettings_bgsas")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseCall" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.540541
+offset_right = -0.540543
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label1" type="Label" parent="CloseCall"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.5946
+offset_top = -33.527
+offset_right = 249.405
+offset_bottom = 59.473
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "CLOSE CALL!"
+label_settings = SubResource("LabelSettings_uot6i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="CloseCall"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.2568
+offset_top = -7.58109
+offset_right = 245.743
+offset_bottom = 85.4189
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "+1 to Score!"
+label_settings = SubResource("LabelSettings_1rnkq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverSequence" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.540541
+offset_right = -0.540543
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label1" type="Label" parent="GameOverSequence"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.027
+offset_top = -42.7162
+offset_right = 273.973
+offset_bottom = 50.2838
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "LAST CHANCE!"
+label_settings = SubResource("LabelSettings_d5l81")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="GameOverSequence"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.027
+offset_top = -3.7973
+offset_right = 273.973
+offset_bottom = 89.2027
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "Grab Meteors To
+Get +1 Points!"
+label_settings = SubResource("LabelSettings_sgwrh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -19,6 +19,8 @@ signal restart_game()
 @onready var start_game_panel = $StartGame
 @onready var restart_panel = $RestartPanel
 
+@onready var right_side_grouping = $RightSide
+
 var texture_rect_ref = preload("res://scenes/bomb_graphic.tscn")
 
 var next_bomb_grey_pref = preload("res://themes/next_bomb_grey.tres")
@@ -29,13 +31,15 @@ var bomb_panel_red = preload("res://themes/bomb_panel_red.tres")
 var bomb_panel_blue = preload("res://themes/blue_panel_corner.tres")
 var bomb_panel_yellow = preload("res://themes/bomb_panel_yellow.tres")
 
+@onready var notif_grouping = $RightSide/NotifGrouping
+var notification_panel_pref = preload("res://scenes/ui_notif_panel.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	change_bomb_value(1)
-	change_bomb_value(1)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 ## Adding is done in player body. Not here. Only UI.
@@ -54,7 +58,9 @@ func change_bomb_value(value: int) -> void:
 			# Bomb container? Delete your first child. NOW.
 			bomb_container.get_child(0).queue_free()
 	
-	#var child_count = await bomb_container.get_child_count()
+	
+	
+	#var child_count = bomb_container.get_child_count()
 	#print("Current children: ", child_count)
 	#if child_count == 2:
 		#bomb_panel.add_theme_stylebox_override("panel", bomb_panel_yellow)
@@ -109,6 +115,32 @@ func _reset_functions() -> void:
 	AudioManager.play_level_bgm()
 	restart_game.emit()
 	reset_game()
+
+#@onready var bomb_available = $BombAvailable
+#@onready var bombs_full = $BombsFull
+#@onready var close_call = $CloseCall
+#@onready var game_over_sequence = $GameOverSequence
+# 1 for available bomb, 2 for full bombs, 3 for close call, 4 for game over notif
+
+func _close_call_detected() -> void:
+	var new_notif = notification_panel_pref.instantiate()
+	new_notif.notif_type = 3
+	notif_grouping.add_child(new_notif)
+
+# -1 if bombs full, 1 if bomb added
+func _bomb_notification(value: int) -> void:
+	var new_notif = notification_panel_pref.instantiate()
+	match value:
+		-1:
+			new_notif.notif_type = 2
+		1:
+			new_notif.notif_type = 1
+	notif_grouping.add_child(new_notif)
+
+func _game_over_begun_notif() -> void:
+	var new_notif = notification_panel_pref.instantiate()
+	new_notif.notif_type = 4
+	notif_grouping.add_child(new_notif)
 
 func pause_game() -> void:
 	pass

@@ -18,6 +18,9 @@ signal change_next_bomb_gui(value: int)
 # signal reset_game()
 
 signal game_over_occured()
+signal close_call_detected()
+signal bomb_notification(value: int)
+signal game_over_begun()
 
 @onready var player_sprite = $PlayerSprite
 @onready var engine_fire_sprite = $PlayerSprite/EngineFire
@@ -280,6 +283,7 @@ func _shoot_item_loop() -> void:
 		var speed_projection_difficulty = randf_range(expected_meteor_speed, expected_meteor_speed + 0.02) - (bombs_detonated * 0.005)
 		# Prepare it to where it should be firing towards.
 		new_projectile.velocity = (new_projectile.position - position) / speed_projection_difficulty
+		print(new_projectile.velocity.length())
 		
 		# Connect signal to proper function spawner
 		new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)
@@ -344,9 +348,12 @@ func _bomb_function(value: int) -> void:
 			# Do not add if bombs are already at 2.
 			if bombs > 1: 
 				AudioManager.sfx_play(bullet_warning_for_full_bomb)
+				bomb_notification.emit(-1)
 				print("Bombs are full.")
 				return
+				
 			AudioManager.sfx_play(player_bomb_obtained)
+			bomb_notification.emit(1)
 			bombs += 1
 			change_bomb_value_gui.emit(1)
 		-1:
@@ -394,6 +401,7 @@ func _player_got_hit() -> void:
 	# Tell meteors that behavior is not different.
 	get_tree().call_group("Meteor", "game_over_sequence")
 	
+	game_over_begun.emit()
 	AudioManager.sfx_play(player_got_hit_sfx.pick_random())
 	
 	print("Player hit! Game over!")
@@ -424,7 +432,9 @@ func reset_game():
 	#reset_game.emit()
 
 func _close_call_detected():
-	print("Close call detected! Plus points!")
+	score += 1
+	close_call_detected.emit()
+	
 
 func game_got_paused() -> void:
 	pass
