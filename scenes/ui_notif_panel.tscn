@@ -34,8 +34,9 @@ shadow_offset = Vector2(0, 5)
 font = ExtResource("3_kf6ee")
 font_size = 20
 font_color = Color(1, 1, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 shadow_size = 2
-shadow_color = Color(0.65098, 0.486275, 0, 1)
 shadow_offset = Vector2(0, 4)
 
 [sub_resource type="LabelSettings" id="LabelSettings_d5l81"]
@@ -174,6 +175,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameOverSequence" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,6 +225,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
