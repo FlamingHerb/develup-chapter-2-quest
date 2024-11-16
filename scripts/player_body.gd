@@ -101,6 +101,23 @@ var shoot_sfx = [
 	preload("res://audio/sfx/player_ship/sfx_wpn_laser10.wav")
 ]
 
+var player_got_hit_sfx = [
+	#preload("res://audio/sfx/player_ship/sfx_exp_shortest_hard1.wav"),
+	#preload("res://audio/sfx/player_ship/sfx_exp_shortest_hard2.wav"),
+	#preload("res://audio/sfx/player_ship/sfx_exp_shortest_hard3.wav")
+	preload("res://audio/sfx/player_ship/sfx_exp_double1.wav"),
+	preload("res://audio/sfx/player_ship/sfx_exp_double2.wav"),
+	preload("res://audio/sfx/player_ship/sfx_exp_double3.wav")
+]
+
+var grabbing_meteors_sfx = [
+	preload("res://audio/sfx/player_ship/sfx_sound_neutral1.wav"),
+	preload("res://audio/sfx/player_ship/sfx_sound_neutral2.wav"),
+	preload("res://audio/sfx/player_ship/sfx_sound_neutral6.wav")
+]
+
+var explosion_sfx = preload("res://audio/sfx/player_ship/sfx_exp_long4.wav")
+
 const SPEED = 150.0
 const ROTATION_SPEED = 2
 
@@ -353,6 +370,7 @@ func _force_back_to_idle_moving() -> void:
 func _player_got_hit() -> void:
 	# Only occurs if meteor hits player again during GAMEOVER state.
 	if current_state == States.GAMEOVER:
+		AudioManager.sfx_play(grabbing_meteors_sfx.pick_random())
 		print("Player grabs meteor.")
 		score += 1
 		return
@@ -374,6 +392,7 @@ func _player_got_hit() -> void:
 	# Tell meteors that behavior is not different.
 	get_tree().call_group("Meteor", "game_over_sequence")
 	
+	AudioManager.sfx_play(player_got_hit_sfx.pick_random())
 	
 	print("Player hit! Game over!")
 
@@ -383,6 +402,7 @@ func _on_game_over_timer_timeout() -> void:
 	get_tree().call_group("Meteor", "queue_free")
 	visible = false
 	game_over_occured.emit()
+	AudioManager.sfx_play(explosion_sfx)
 	AudioManager.stop_level_bgm()
 	print("Times out, time to die!")
 
