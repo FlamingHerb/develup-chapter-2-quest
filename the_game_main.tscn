@@ -108,10 +108,10 @@ point_count = 5
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ih4m"]
 texture = ExtResource("16_wdbva")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
 draw_center = false
 
 [node name="TheGameMain" type="Node"]
@@ -261,14 +261,15 @@ metadata/_edit_lock_ = true
 process_mode = 3
 script = ExtResource("12_ekx06")
 
-[node name="Panel" type="Panel" parent="UIStuff"]
+[node name="GamePanel" type="Panel" parent="UIStuff"]
 texture_filter = 1
-offset_left = 391.0
-offset_top = -29.0
-offset_right = 491.0
-offset_bottom = 71.0
-scale = Vector2(11.38, 11.38)
+offset_left = 416.0
+offset_top = -4.0
+offset_right = 516.0
+offset_bottom = 96.0
+scale = Vector2(10.885, 10.885)
 theme_override_styles/panel = SubResource("StyleBoxTexture_8ih4m")
+metadata/_edit_lock_ = true
 
 [node name="LeftSide" type="Control" parent="UIStuff"]
 layout_mode = 3
@@ -280,19 +281,20 @@ metadata/_edit_lock_ = true
 [node name="RightSide" type="Control" parent="UIStuff"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1524.0
+offset_left = 1505.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="ScorePanel" type="Panel" parent="UIStuff/RightSide"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 25.0
+offset_left = 22.0
 offset_top = 32.0
-offset_right = 225.0
+offset_right = 222.0
 offset_bottom = 112.0
-scale = Vector2(1.75, 1.75)
+scale = Vector2(1.85, 1.85)
 theme_override_styles/panel = ExtResource("12_ur6vw")
+metadata/_edit_lock_ = true
 
 [node name="ScoreLabel" type="Label" parent="UIStuff/RightSide/ScorePanel"]
 layout_mode = 1
@@ -324,12 +326,13 @@ metadata/_edit_lock_ = true
 [node name="StaminaPanel" type="Panel" parent="UIStuff/RightSide"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 25.0
-offset_top = 216.0
-offset_right = 225.0
-offset_bottom = 296.0
-scale = Vector2(1.75, 1.75)
+offset_left = 22.0
+offset_top = 200.0
+offset_right = 222.0
+offset_bottom = 280.0
+scale = Vector2(1.85, 1.85)
 theme_override_styles/panel = ExtResource("15_qlfci")
+metadata/_edit_lock_ = true
 
 [node name="StaminaLabel" type="Label" parent="UIStuff/RightSide/StaminaPanel"]
 layout_mode = 1
@@ -360,12 +363,13 @@ metadata/_edit_lock_ = true
 [node name="BombPanel" type="Panel" parent="UIStuff/RightSide"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 25.0
-offset_top = 400.0
-offset_right = 225.0
-offset_bottom = 480.0
-scale = Vector2(1.75, 1.75)
+offset_left = 22.0
+offset_top = 368.0
+offset_right = 222.0
+offset_bottom = 448.0
+scale = Vector2(1.85, 1.85)
 theme_override_styles/panel = ExtResource("22_yu6be")
+metadata/_edit_lock_ = true
 
 [node name="BombsLabel" type="Label" parent="UIStuff/RightSide/BombPanel"]
 layout_mode = 0
@@ -397,12 +401,13 @@ grow_vertical = 2
 [node name="NextBombPanel" type="Panel" parent="UIStuff/RightSide"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 25.0
-offset_top = 584.0
-offset_right = 225.0
-offset_bottom = 664.0
-scale = Vector2(1.75, 1.75)
+offset_left = 22.0
+offset_top = 536.0
+offset_right = 222.0
+offset_bottom = 616.0
+scale = Vector2(1.85, 1.85)
 theme_override_styles/panel = ExtResource("23_rxqww")
+metadata/_edit_lock_ = true
 
 [node name="NextBombLabel" type="Label" parent="UIStuff/RightSide/NextBombPanel"]
 layout_mode = 1
