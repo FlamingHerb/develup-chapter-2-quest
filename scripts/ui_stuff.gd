@@ -80,3 +80,10 @@ func _reset_functions() -> void:
 	AudioManager.play_level_bgm()
 	restart_game.emit()
 	reset_game()
+
+func pause_game() -> void:
+	pass
+	
+func resume_game() -> void:
+	pass
+	

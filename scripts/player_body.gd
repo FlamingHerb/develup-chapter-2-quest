@@ -399,6 +399,10 @@ func reset_game():
 	get_tree().call_group("player_projectiles", "queue_free")
 	
 	visible = true
-	
-	
 	#reset_game.emit()
+
+func game_got_paused() -> void:
+	pass
+	
+func game_got_resumed() -> void:
+	pass

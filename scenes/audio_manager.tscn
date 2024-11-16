@@ -16,6 +16,7 @@ stream_1 = ExtResource("3_uk58f")
 stream_2 = ExtResource("4_01r21")
 
 [node name="AudioManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_fowy0")
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]

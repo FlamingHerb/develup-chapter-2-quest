@@ -11,6 +11,9 @@ extends Node
 @onready var slowdown_sound = %SlowDownSound
 @onready var speedup_sound = %SpeedUpSound
 
+var pause_game_sfx = preload("res://audio/sfx/menu_sfx/sfx_sounds_pause1_in.wav")
+var resume_game_sfx = preload("res://audio/sfx/menu_sfx/sfx_sounds_pause1_out.wav")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -138,7 +141,12 @@ func stop_speedup_sfx() -> void:
 	speedup_sound.stop()
 
 func pause_game() -> void:
+	sfx_stop_all()
+	bgm_pause(true)
+	sfx_play(pause_game_sfx)
 	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, true)
 
 func resume_game() -> void:
+	sfx_play(resume_game_sfx)
+	bgm_pause(false)
 	AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("BGM"), 0, false)
