@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=37 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -20,6 +20,7 @@
 [ext_resource type="LabelSettings" uid="uid://b8tuhrkmxsm73" path="res://themes/score_standard.tres" id="13_wafso"]
 [ext_resource type="StyleBox" uid="uid://b267xrlxbunc7" path="res://themes/green_panel_corner.tres" id="15_qlfci"]
 [ext_resource type="Texture2D" uid="uid://dfeuakx5qvus4" path="res://graphics/gui/bar_square_large.png" id="16_e1jax"]
+[ext_resource type="Texture2D" uid="uid://dmb3togna4wf5" path="res://graphics/gui/metalPanel.png" id="16_wdbva"]
 [ext_resource type="Texture2D" uid="uid://cl3c6ld01n4vr" path="res://graphics/gui/bar_square_green.png" id="17_j50km"]
 [ext_resource type="Texture2D" uid="uid://bpg0q5imgnmvl" path="res://graphics/gui/bar_square_blue.png" id="21_ekm1d"]
 [ext_resource type="Texture2D" uid="uid://buckamsbplidh" path="res://graphics/gui/bar_bomb_overcharge.png" id="22_py7ja"]
@@ -104,6 +105,14 @@ _data = {
 "points": PackedVector2Array(25.1784, 0.170422, -15, 0, 0, -15, 0, 0, 0, 0, -15, 0.481482, -15, 0, 15, 0, 0, 15, 0, 0, 0, -15, 15, 0.481482, 0, 0, 0, 0, 0, -15)
 }
 point_count = 5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ih4m"]
+texture = ExtResource("16_wdbva")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+draw_center = false
 
 [node name="TheGameMain" type="Node"]
 process_mode = 3
@@ -252,6 +261,15 @@ metadata/_edit_lock_ = true
 process_mode = 3
 script = ExtResource("12_ekx06")
 
+[node name="Panel" type="Panel" parent="UIStuff"]
+texture_filter = 1
+offset_left = 391.0
+offset_top = -29.0
+offset_right = 491.0
+offset_bottom = 71.0
+scale = Vector2(11.38, 11.38)
+theme_override_styles/panel = SubResource("StyleBoxTexture_8ih4m")
+
 [node name="LeftSide" type="Control" parent="UIStuff"]
 layout_mode = 3
 anchors_preset = 0
@@ -262,10 +280,9 @@ metadata/_edit_lock_ = true
 [node name="RightSide" type="Control" parent="UIStuff"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1472.0
+offset_left = 1524.0
 offset_right = 1920.0
 offset_bottom = 1080.0
-metadata/_edit_lock_ = true
 
 [node name="ScorePanel" type="Panel" parent="UIStuff/RightSide"]
 texture_filter = 1
@@ -274,9 +291,8 @@ offset_left = 25.0
 offset_top = 32.0
 offset_right = 225.0
 offset_bottom = 112.0
-scale = Vector2(2, 2)
+scale = Vector2(1.75, 1.75)
 theme_override_styles/panel = ExtResource("12_ur6vw")
-metadata/_edit_lock_ = true
 
 [node name="ScoreLabel" type="Label" parent="UIStuff/RightSide/ScorePanel"]
 layout_mode = 1
@@ -312,9 +328,8 @@ offset_left = 25.0
 offset_top = 216.0
 offset_right = 225.0
 offset_bottom = 296.0
-scale = Vector2(2, 2)
+scale = Vector2(1.75, 1.75)
 theme_override_styles/panel = ExtResource("15_qlfci")
-metadata/_edit_lock_ = true
 
 [node name="StaminaLabel" type="Label" parent="UIStuff/RightSide/StaminaPanel"]
 layout_mode = 1
@@ -349,9 +364,8 @@ offset_left = 25.0
 offset_top = 400.0
 offset_right = 225.0
 offset_bottom = 480.0
-scale = Vector2(2, 2)
+scale = Vector2(1.75, 1.75)
 theme_override_styles/panel = ExtResource("22_yu6be")
-metadata/_edit_lock_ = true
 
 [node name="BombsLabel" type="Label" parent="UIStuff/RightSide/BombPanel"]
 layout_mode = 0
@@ -387,9 +401,8 @@ offset_left = 25.0
 offset_top = 584.0
 offset_right = 225.0
 offset_bottom = 664.0
-scale = Vector2(2, 2)
+scale = Vector2(1.75, 1.75)
 theme_override_styles/panel = ExtResource("23_rxqww")
-metadata/_edit_lock_ = true
 
 [node name="NextBombLabel" type="Label" parent="UIStuff/RightSide/NextBombPanel"]
 layout_mode = 1
@@ -472,6 +485,7 @@ offset_right = 512.0
 offset_bottom = 512.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="NewGameButton" type="Button" parent="UIStuff/StartGame"]
 layout_mode = 1
