@@ -47,6 +47,7 @@ var bombs: int = 2:
 		print("Current bomb count: ", bombs)
 var bombs_detonated: int = 0:
 	set(value):
+		bombs_detonated = value
 		print("Current difficulty: ", bombs_detonated)
 var current_state: States = States.GAMEOVER:
 	set(value):
