@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bweiuohy1iojh"]
 
-[ext_resource type="Texture2D" uid="uid://cgp0r3duyvbtv" path="res://graphics/gui/powerupBlue_bolt.png" id="1_nfrqb"]
+[ext_resource type="Texture2D" uid="uid://sdwu1ugnrwaa" path="res://graphics/gui/powerupRed_bolt.png" id="1_ijhiv"]
 
 [node name="Bomb1" type="TextureRect" groups=["bomb_graphic"]]
-texture = ExtResource("1_nfrqb")
+texture = ExtResource("1_ijhiv")

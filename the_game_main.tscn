@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=35 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -20,11 +20,11 @@
 [ext_resource type="LabelSettings" uid="uid://b8tuhrkmxsm73" path="res://themes/score_standard.tres" id="13_wafso"]
 [ext_resource type="StyleBox" uid="uid://b267xrlxbunc7" path="res://themes/green_panel_corner.tres" id="15_qlfci"]
 [ext_resource type="Texture2D" uid="uid://dfeuakx5qvus4" path="res://graphics/gui/bar_square_large.png" id="16_e1jax"]
-[ext_resource type="StyleBox" uid="uid://ds2t5deenfw8j" path="res://themes/blue_panel_corner.tres" id="17_fxs6w"]
 [ext_resource type="Texture2D" uid="uid://cl3c6ld01n4vr" path="res://graphics/gui/bar_square_green.png" id="17_j50km"]
 [ext_resource type="Texture2D" uid="uid://bpg0q5imgnmvl" path="res://graphics/gui/bar_square_blue.png" id="21_ekm1d"]
-[ext_resource type="Texture2D" uid="uid://dpl2k7alykla8" path="res://graphics/gui/metalPanel_blue.png" id="21_s3m6q"]
 [ext_resource type="Texture2D" uid="uid://buckamsbplidh" path="res://graphics/gui/bar_bomb_overcharge.png" id="22_py7ja"]
+[ext_resource type="StyleBox" uid="uid://cebf41iv614oh" path="res://themes/bomb_panel_red.tres" id="22_yu6be"]
+[ext_resource type="StyleBox" uid="uid://52jjsio344y7" path="res://themes/next_bomb_grey.tres" id="23_rxqww"]
 [ext_resource type="Theme" uid="uid://cxy0y40lb1o0r" path="res://themes/buttom_default.tres" id="26_xjcso"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
@@ -104,14 +104,6 @@ _data = {
 "points": PackedVector2Array(25.1784, 0.170422, -15, 0, 0, -15, 0, 0, 0, 0, -15, 0.481482, -15, 0, 15, 0, 0, 15, 0, 0, 0, -15, 15, 0.481482, 0, 0, 0, 0, 0, -15)
 }
 point_count = 5
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i870f"]
-texture = ExtResource("21_s3m6q")
-texture_margin_left = 32.0
-texture_margin_top = 30.0
-texture_margin_right = 55.0
-texture_margin_bottom = 18.0
-region_rect = Rect2(0, 0, 100, 100)
 
 [node name="TheGameMain" type="Node"]
 process_mode = 3
@@ -358,7 +350,7 @@ offset_top = 400.0
 offset_right = 225.0
 offset_bottom = 480.0
 scale = Vector2(2, 2)
-theme_override_styles/panel = ExtResource("17_fxs6w")
+theme_override_styles/panel = ExtResource("22_yu6be")
 metadata/_edit_lock_ = true
 
 [node name="BombsLabel" type="Label" parent="UIStuff/RightSide/BombPanel"]
@@ -396,7 +388,7 @@ offset_top = 584.0
 offset_right = 225.0
 offset_bottom = 664.0
 scale = Vector2(2, 2)
-theme_override_styles/panel = SubResource("StyleBoxTexture_i870f")
+theme_override_styles/panel = ExtResource("23_rxqww")
 metadata/_edit_lock_ = true
 
 [node name="NextBombLabel" type="Label" parent="UIStuff/RightSide/NextBombPanel"]
