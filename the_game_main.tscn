@@ -445,13 +445,17 @@ max_value = 64.0
 texture_progress = ExtResource("22_py7ja")
 metadata/_edit_lock_ = true
 
-[node name="NotifGrouping" type="Control" parent="UIStuff/RightSide"]
+[node name="NotifGrouping" type="VBoxContainer" parent="UIStuff/RightSide"]
+custom_minimum_size = Vector2(224, 100)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = -1
+offset_left = 32.0
+offset_top = 706.0
+offset_right = 256.0
+offset_bottom = 1046.0
+scale = Vector2(1.6, 1.6)
+theme_override_constants/separation = 20
+metadata/_edit_lock_ = true
 
 [node name="RestartPanel" type="Control" parent="UIStuff"]
 visible = false

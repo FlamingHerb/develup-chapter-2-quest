@@ -283,7 +283,7 @@ func _shoot_item_loop() -> void:
 		var speed_projection_difficulty = randf_range(expected_meteor_speed, expected_meteor_speed + 0.02) - (bombs_detonated * 0.005)
 		# Prepare it to where it should be firing towards.
 		new_projectile.velocity = (new_projectile.position - position) / speed_projection_difficulty
-		print(new_projectile.velocity.length())
+		#print(new_projectile.velocity.length())
 		
 		# Connect signal to proper function spawner
 		new_projectile.will_spawn_meteor.connect(_meteor_spawn_from_bounces)

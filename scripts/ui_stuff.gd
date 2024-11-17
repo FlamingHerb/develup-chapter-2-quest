@@ -126,6 +126,7 @@ func _close_call_detected() -> void:
 	var new_notif = notification_panel_pref.instantiate()
 	new_notif.notif_type = 3
 	notif_grouping.add_child(new_notif)
+	notif_grouping.move_child(new_notif, 0)
 
 # -1 if bombs full, 1 if bomb added
 func _bomb_notification(value: int) -> void:
@@ -136,11 +137,13 @@ func _bomb_notification(value: int) -> void:
 		1:
 			new_notif.notif_type = 1
 	notif_grouping.add_child(new_notif)
+	notif_grouping.move_child(new_notif, 0)
 
 func _game_over_begun_notif() -> void:
 	var new_notif = notification_panel_pref.instantiate()
 	new_notif.notif_type = 4
 	notif_grouping.add_child(new_notif)
+	notif_grouping.move_child(new_notif, 0)
 
 func pause_game() -> void:
 	pass

@@ -57,11 +57,14 @@ shadow_color = Color(0, 0, 0, 1)
 
 [node name="UINotifPanel" type="Panel"]
 texture_filter = 1
+custom_minimum_size = Vector2(200, 100)
 offset_left = 22.0
 offset_top = 704.0
 offset_right = 222.0
-offset_bottom = 864.0
+offset_bottom = 804.0
 scale = Vector2(1.85, 1.85)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("1_i3ji4")
 script = ExtResource("2_uqq3d")
 metadata/_edit_lock_ = true
