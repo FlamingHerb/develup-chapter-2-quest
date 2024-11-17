@@ -16,6 +16,8 @@ func _ready() -> void:
 	#player_ship.reset_game.connect(general_ui.reset_game)
 	player_ship.game_over_occured.connect(general_ui.game_over_occured)
 	player_ship.game_over_occured.connect(_game_over_occured)
+	player_ship.game_over_begun.connect(_game_over_occured)
+	
 	player_ship.close_call_detected.connect(general_ui._close_call_detected)
 	player_ship.bomb_notification.connect(general_ui._bomb_notification)
 	player_ship.game_over_begun.connect(general_ui._game_over_begun_notif)
