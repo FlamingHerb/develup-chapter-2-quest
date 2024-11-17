@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=64 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -45,6 +45,10 @@
 [ext_resource type="Texture2D" uid="uid://dio8wn40ww77w" path="res://graphics/controls/keyboard_f11.png" id="30_uh2jl"]
 [ext_resource type="FontFile" uid="uid://dcydywrlj3rlp" path="res://fonts/kenney_future.ttf" id="43_4i6xg"]
 [ext_resource type="Texture2D" uid="uid://cvu2fpdfmkfp" path="res://graphics/other_stuff/spaceship_blurred.png" id="43_iwrnn"]
+[ext_resource type="Texture2D" uid="uid://vxvvmux0wlxj" path="res://graphics/other_stuff/help_1.png" id="46_5jq5y"]
+[ext_resource type="LabelSettings" uid="uid://36kmd007ibkt" path="res://themes/help_text.tres" id="47_tr5jv"]
+[ext_resource type="Texture2D" uid="uid://phf0nxmw08un" path="res://graphics/other_stuff/help_2.png" id="48_qj7fs"]
+[ext_resource type="Texture2D" uid="uid://b1k05igy50xcj" path="res://graphics/other_stuff/help_3.png" id="49_8yrwb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
 bounce = 1.0
@@ -179,18 +183,6 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="BackgroundColor" type="ColorRect" parent="Background"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-metadata/_edit_lock_ = true
-
 [node name="BackgroundSideLeft" type="TextureRect" parent="Background"]
 layout_mode = 0
 offset_right = 504.0
@@ -225,6 +217,17 @@ process_mode = 1
 position = Vector2(960, 540)
 scale = Vector2(4, 4)
 texture = ExtResource("2_2nlbx")
+metadata/_edit_lock_ = true
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 1, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="CollisionsArea" type="StaticBody2D" parent="."]
@@ -877,8 +880,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -250.0
+offset_top = -32.0
 offset_right = 250.0
-offset_bottom = 486.0
+offset_bottom = 454.0
 grow_horizontal = 2
 
 [node name="Image" type="TextureRect" parent="UIStuff/GeneralPanel/Logo"]
@@ -957,9 +961,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -195.5
-offset_top = 286.5
+offset_top = 302.5
 offset_right = 195.5
-offset_bottom = 417.5
+offset_bottom = 433.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("26_xjcso")
@@ -973,13 +977,96 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -190.5
-offset_top = 286.5
+offset_top = 302.5
 offset_right = 190.5
-offset_bottom = 417.5
+offset_bottom = 433.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("26_xjcso")
 text = "NEW GAME"
+
+[node name="HelpZone" type="Control" parent="UIStuff/GeneralPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 386.0
+offset_bottom = -265.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReloadShine" type="TextureRect" parent="UIStuff/GeneralPanel/HelpZone"]
+modulate = Color(0.705882, 0.396078, 0.611765, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 136.0
+offset_top = 112.0
+offset_right = 231.0
+offset_bottom = 207.0
+texture = ExtResource("11_vs6nw")
+
+[node name="HelpText" type="HBoxContainer" parent="UIStuff/GeneralPanel/HelpZone"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -478.0
+offset_top = -174.5
+offset_right = 478.0
+offset_bottom = 174.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIStuff/GeneralPanel/HelpZone/HelpText"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 5
+
+[node name="TextureRect" type="TextureRect" parent="UIStuff/GeneralPanel/HelpZone/HelpText/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("46_5jq5y")
+
+[node name="Label" type="Label" parent="UIStuff/GeneralPanel/HelpZone/HelpText/VBoxContainer"]
+layout_mode = 2
+text = "Reload
+your bullets."
+label_settings = ExtResource("47_tr5jv")
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UIStuff/GeneralPanel/HelpZone/HelpText"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 5
+
+[node name="TextureRect" type="TextureRect" parent="UIStuff/GeneralPanel/HelpZone/HelpText/VBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("48_qj7fs")
+
+[node name="Label" type="Label" parent="UIStuff/GeneralPanel/HelpZone/HelpText/VBoxContainer2"]
+layout_mode = 2
+text = "Shoot
+your bullets."
+label_settings = ExtResource("47_tr5jv")
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="UIStuff/GeneralPanel/HelpZone/HelpText"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 5
+
+[node name="TextureRect" type="TextureRect" parent="UIStuff/GeneralPanel/HelpZone/HelpText/VBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("49_8yrwb")
+
+[node name="Label" type="Label" parent="UIStuff/GeneralPanel/HelpZone/HelpText/VBoxContainer3"]
+layout_mode = 2
+text = "Don't die to
+your bullets."
+label_settings = ExtResource("47_tr5jv")
+horizontal_alignment = 1
 
 [connection signal="timeout" from="PlayerBody/HoldDownTimer" to="PlayerBody" method="_orbit_spawn_after_timeout"]
 [connection signal="timeout" from="PlayerBody/GameOverTimer" to="PlayerBody" method="_on_game_over_timer_timeout"]
