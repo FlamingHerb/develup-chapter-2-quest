@@ -1,8 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=40 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
+[ext_resource type="Texture2D" uid="uid://d1wtifp1ntsqd" path="res://graphics/other_stuff/spaceship.png" id="2_g3x12"]
+[ext_resource type="Texture2D" uid="uid://bmnl2ysr2wemr" path="res://graphics/other_stuff/scene_1.webp" id="2_njjpv"]
 [ext_resource type="Script" path="res://scripts/player_body.gd" id="3_6f0q0"]
+[ext_resource type="Texture2D" uid="uid://dmk702xyi77im" path="res://graphics/other_stuff/scene_2.webp" id="3_lbqnv"]
 [ext_resource type="Texture2D" uid="uid://dxrsvv6lcpd8b" path="res://graphics/spaceship_parts/playership1_red.png" id="4_b70w8"]
 [ext_resource type="Texture2D" uid="uid://ciq23gpd0p816" path="res://graphics/spaceship_parts/fire02.png" id="6_n3ii6"]
 [ext_resource type="Texture2D" uid="uid://cmsk66txox132" path="res://graphics/spaceship_parts/fire03.png" id="7_tqw60"]
@@ -118,7 +121,17 @@ draw_center = false
 process_mode = 3
 script = ExtResource("1_o1j5i")
 
-[node name="BackgroundColor" type="ColorRect" parent="."]
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundColor" type="ColorRect" parent="Background"]
+visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -127,6 +140,33 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_right = 504.0
+offset_bottom = 1080.0
+texture = ExtResource("2_njjpv")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 1416.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_lbqnv")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="SpaceshipBackground" type="TextureRect" parent="Background"]
+modulate = Color(1, 1, 1, 0.447059)
+texture_filter = 1
+layout_mode = 0
+offset_left = -128.0
+offset_top = -119.0
+offset_right = 491.0
+offset_bottom = 500.0
+texture = ExtResource("2_g3x12")
 
 [node name="SpaceBackground" type="Sprite2D" parent="."]
 process_mode = 1
@@ -454,6 +494,7 @@ offset_right = 224.0
 offset_bottom = 1050.0
 scale = Vector2(1.85, 1.85)
 theme_override_constants/separation = 20
+metadata/_edit_lock_ = true
 
 [node name="RestartPanel" type="Control" parent="UIStuff"]
 visible = false
