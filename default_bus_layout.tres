@@ -2,7 +2,6 @@
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_2d71c"]
 resource_name = "LowPassFilter"
-cutoff_hz = 300.0
 
 [sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_qnxy7"]
 resource_name = "Phaser"
