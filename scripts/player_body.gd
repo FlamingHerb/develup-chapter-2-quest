@@ -23,6 +23,7 @@ signal bomb_notification(value: int)
 signal game_over_begun()
 
 @onready var player_sprite = $PlayerSprite
+@onready var player_hitbox = $PlayerHitbox
 @onready var engine_fire_sprite = $PlayerSprite/EngineFire
 @onready var boost_fire_sprite = $PlayerSprite/BoostEngineFire
 @onready var reload_animation = $ReloadAnim
@@ -405,6 +406,8 @@ func _player_got_hit() -> void:
 	AudioManager.sfx_play(player_got_hit_sfx.pick_random())
 	AudioManager.game_over_effects_start()
 	
+	player_hitbox.shape.radius = 8
+	
 	print("Player hit! Game over!")
 
 ## When the game tells us that everything should be annihilated.
@@ -419,6 +422,8 @@ func _on_game_over_timer_timeout() -> void:
 	print("Times out, time to die!")
 
 func reset_game():
+	# Change back shape to proper after gameover.
+	player_hitbox.shape.radius = 4
 	bombs = 2
 	bombs_detonated = 0
 	current_state = States.IDLE

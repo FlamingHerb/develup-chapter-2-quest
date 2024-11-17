@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=60 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -42,6 +42,9 @@
 [ext_resource type="Texture2D" uid="uid://cnll5ysrho1tv" path="res://graphics/controls/keyboard_ctrl.png" id="27_34b5s"]
 [ext_resource type="Texture2D" uid="uid://c6ddp67tymwvc" path="res://graphics/controls/keyboard_c.png" id="27_vutbv"]
 [ext_resource type="Texture2D" uid="uid://n5jb26t42afh" path="res://graphics/controls/keyboard_escape.png" id="28_5vt2x"]
+[ext_resource type="Texture2D" uid="uid://dio8wn40ww77w" path="res://graphics/controls/keyboard_f11.png" id="30_uh2jl"]
+[ext_resource type="FontFile" uid="uid://dcydywrlj3rlp" path="res://fonts/kenney_future.ttf" id="43_4i6xg"]
+[ext_resource type="Texture2D" uid="uid://cvu2fpdfmkfp" path="res://graphics/other_stuff/spaceship_blurred.png" id="43_iwrnn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
 bounce = 1.0
@@ -129,6 +132,20 @@ texture_margin_right = 3.0
 texture_margin_bottom = 3.0
 draw_center = false
 
+[sub_resource type="LabelSettings" id="LabelSettings_pxxoq"]
+font = ExtResource("43_4i6xg")
+font_size = 52
+font_color = Color(1, 0.729412, 0.235294, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0, -6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wrkh0"]
+font = ExtResource("43_4i6xg")
+font_size = 28
+font_color = Color(0, 0, 0, 1)
+outline_size = 8
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0fxr6"]
 texture = ExtResource("20_1aqeq")
 texture_margin_left = 32.0
@@ -144,6 +161,10 @@ texture_margin_top = 30.0
 texture_margin_right = 55.0
 texture_margin_bottom = 18.0
 region_rect = Rect2(0, 0, 100, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8yxnc"]
+font = ExtResource("43_4i6xg")
+font_size = 10
 
 [node name="TheGameMain" type="Node"]
 process_mode = 3
@@ -348,16 +369,55 @@ anchors_preset = 0
 offset_top = 24.0
 offset_right = 448.0
 offset_bottom = 1104.0
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="UIStuff/LeftSide"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.0
+offset_top = -492.0
+offset_right = 280.0
+offset_bottom = -433.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+text = "Lost Voyager"
+label_settings = SubResource("LabelSettings_pxxoq")
+metadata/_edit_lock_ = true
+
+[node name="Subtitle" type="Label" parent="UIStuff/LeftSide"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -448.5
+offset_right = 229.0
+offset_bottom = -416.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+text = "Asteroid Destroyer"
+label_settings = SubResource("LabelSettings_wrkh0")
+metadata/_edit_lock_ = true
 
 [node name="HowToPlayPanel" type="Panel" parent="UIStuff/LeftSide"]
 self_modulate = Color(0.862745, 0.862745, 0.862745, 1)
 texture_filter = 1
-offset_left = 22.0
-offset_top = 193.0
-offset_right = 222.0
-offset_bottom = 448.0
+layout_mode = 0
+offset_left = 24.0
+offset_top = 180.0
+offset_right = 224.0
+offset_bottom = 462.0
 scale = Vector2(1.85, 1.85)
 theme_override_styles/panel = SubResource("StyleBoxTexture_0fxr6")
+metadata/_edit_lock_ = true
 
 [node name="ControlsHeading" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel"]
 layout_mode = 1
@@ -374,11 +434,11 @@ metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 28.0
-offset_right = 197.0
-offset_bottom = 219.0
-theme_override_constants/separation = -5
+offset_left = -0.702703
+offset_top = 28.5405
+offset_right = 194.297
+offset_bottom = 281.541
+theme_override_constants/separation = -6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
 layout_mode = 2
@@ -514,13 +574,33 @@ label_settings = ExtResource("23_e8j7s")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HBoxContainer8" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer8"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+texture = ExtResource("30_uh2jl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreditsHeading8" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Fullscreen"
+label_settings = ExtResource("23_e8j7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CreditsPanel" type="Panel" parent="UIStuff/LeftSide"]
 self_modulate = Color(0.862745, 0.862745, 0.862745, 1)
 texture_filter = 1
-offset_left = 22.0
-offset_top = 685.0
-offset_right = 222.0
-offset_bottom = 877.0
+layout_mode = 0
+offset_left = 24.0
+offset_top = 719.0
+offset_right = 224.0
+offset_bottom = 892.0
 scale = Vector2(1.85, 1.85)
 theme_override_styles/panel = SubResource("StyleBoxTexture_rvkh4")
 metadata/_edit_lock_ = true
@@ -785,21 +865,91 @@ metadata/_edit_lock_ = true
 
 [node name="GeneralPanel" type="Control" parent="UIStuff"]
 layout_mode = 3
+anchors_preset = 0
+offset_left = 448.0
+offset_top = 28.0
+offset_right = 1472.0
+offset_bottom = 1052.0
+
+[node name="Logo" type="Control" parent="UIStuff/GeneralPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 486.0
+grow_horizontal = 2
+
+[node name="Image" type="TextureRect" parent="UIStuff/GeneralPanel/Logo"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -512.0
-offset_top = -512.0
-offset_right = 512.0
-offset_bottom = 512.0
+offset_left = -209.0
+offset_top = -249.0
+offset_right = 209.0
+offset_bottom = 169.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
+texture = ExtResource("43_iwrnn")
+
+[node name="Title" type="Label" parent="UIStuff/GeneralPanel/Logo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -369.0
+offset_top = 28.0
+offset_right = 124.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "Lost Voyager"
+label_settings = SubResource("LabelSettings_pxxoq")
+
+[node name="Subtitle" type="Label" parent="UIStuff/GeneralPanel/Logo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -293.0
+offset_top = 105.5
+offset_right = 98.0
+offset_bottom = 137.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "Asteroid Destroyer"
+label_settings = SubResource("LabelSettings_wrkh0")
+
+[node name="Subtitle2" type="Label" parent="UIStuff/GeneralPanel/Logo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -293.0
+offset_top = 162.0
+offset_right = 98.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "The game where you shoot your own obstacles."
+label_settings = SubResource("LabelSettings_8yxnc")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RestartButton" type="Button" parent="UIStuff/GeneralPanel"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -807,9 +957,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -195.5
-offset_top = -65.5
+offset_top = 286.5
 offset_right = 195.5
-offset_bottom = 65.5
+offset_bottom = 417.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("26_xjcso")
@@ -823,9 +973,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -190.5
-offset_top = -65.5
+offset_top = 286.5
 offset_right = 190.5
-offset_bottom = 65.5
+offset_bottom = 417.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("26_xjcso")
