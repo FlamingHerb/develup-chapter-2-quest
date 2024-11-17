@@ -1,10 +1,10 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ce5d122iw53gs"]
 
-[ext_resource type="FontFile" uid="uid://dhgmmhbd8dhij" path="res://fonts/kenney_space.ttf" id="1_s7oem"]
+[ext_resource type="FontFile" uid="uid://dcydywrlj3rlp" path="res://fonts/kenney_future.ttf" id="1_n2i86"]
 
 [resource]
-font = ExtResource("1_s7oem")
-font_size = 10
+font = ExtResource("1_n2i86")
+font_size = 15
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
