@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=54 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -25,14 +25,23 @@
 [ext_resource type="Texture2D" uid="uid://dfeuakx5qvus4" path="res://graphics/gui/bar_square_large.png" id="16_e1jax"]
 [ext_resource type="Texture2D" uid="uid://dmb3togna4wf5" path="res://graphics/gui/metalPanel.png" id="16_wdbva"]
 [ext_resource type="Texture2D" uid="uid://cl3c6ld01n4vr" path="res://graphics/gui/bar_square_green.png" id="17_j50km"]
+[ext_resource type="Texture2D" uid="uid://1si4t7momo3v" path="res://graphics/gui/metalPanel_violet.png" id="20_1aqeq"]
 [ext_resource type="Texture2D" uid="uid://b34aqerxftisp" path="res://graphics/gui/metalPanel_greygrey.png" id="20_uuyos"]
 [ext_resource type="Texture2D" uid="uid://bpg0q5imgnmvl" path="res://graphics/gui/bar_square_blue.png" id="21_ekm1d"]
 [ext_resource type="LabelSettings" uid="uid://birp78gfgrvn5" path="res://themes/credits_standard.tres" id="21_qj7em"]
 [ext_resource type="Texture2D" uid="uid://buckamsbplidh" path="res://graphics/gui/bar_bomb_overcharge.png" id="22_py7ja"]
 [ext_resource type="LabelSettings" uid="uid://c6n7rrtk7fv7r" path="res://themes/credits_text.tres" id="22_vsvop"]
+[ext_resource type="Texture2D" uid="uid://chh5xffy5wsvj" path="res://graphics/controls/keyboard_arrows.png" id="22_wvl45"]
 [ext_resource type="StyleBox" uid="uid://cebf41iv614oh" path="res://themes/bomb_panel_red.tres" id="22_yu6be"]
+[ext_resource type="LabelSettings" uid="uid://ce5d122iw53gs" path="res://themes/controls_label.tres" id="23_e8j7s"]
 [ext_resource type="StyleBox" uid="uid://52jjsio344y7" path="res://themes/next_bomb_grey.tres" id="23_rxqww"]
+[ext_resource type="Texture2D" uid="uid://c5ybxym4pnja1" path="res://graphics/controls/keyboard_r.png" id="24_4o2xo"]
+[ext_resource type="Texture2D" uid="uid://d035as45ck0t1" path="res://graphics/controls/keyboard_space.png" id="25_0nsd2"]
+[ext_resource type="Texture2D" uid="uid://d0lqia37ajt5n" path="res://graphics/controls/keyboard_shift.png" id="26_jie8y"]
 [ext_resource type="Theme" uid="uid://cxy0y40lb1o0r" path="res://themes/buttom_default.tres" id="26_xjcso"]
+[ext_resource type="Texture2D" uid="uid://cnll5ysrho1tv" path="res://graphics/controls/keyboard_ctrl.png" id="27_34b5s"]
+[ext_resource type="Texture2D" uid="uid://c6ddp67tymwvc" path="res://graphics/controls/keyboard_c.png" id="27_vutbv"]
+[ext_resource type="Texture2D" uid="uid://n5jb26t42afh" path="res://graphics/controls/keyboard_escape.png" id="28_5vt2x"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
 bounce = 1.0
@@ -120,6 +129,14 @@ texture_margin_right = 3.0
 texture_margin_bottom = 3.0
 draw_center = false
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0fxr6"]
+texture = ExtResource("20_1aqeq")
+texture_margin_left = 32.0
+texture_margin_top = 30.0
+texture_margin_right = 55.0
+texture_margin_bottom = 18.0
+region_rect = Rect2(0, 0, 100, 100)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rvkh4"]
 texture = ExtResource("20_uuyos")
 texture_margin_left = 32.0
@@ -139,6 +156,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="BackgroundColor" type="ColorRect" parent="Background"]
 visible = false
@@ -159,6 +177,7 @@ offset_bottom = 1080.0
 texture = ExtResource("2_njjpv")
 expand_mode = 1
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="BackgroundSideRight" type="TextureRect" parent="Background"]
 layout_mode = 0
@@ -168,15 +187,16 @@ offset_bottom = 1080.0
 texture = ExtResource("3_lbqnv")
 expand_mode = 1
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="SpaceshipBackground" type="TextureRect" parent="Background"]
 modulate = Color(1, 1, 1, 0.447059)
 texture_filter = 1
 layout_mode = 0
 offset_left = -128.0
-offset_top = -119.0
+offset_top = -207.0
 offset_right = 491.0
-offset_bottom = 500.0
+offset_bottom = 412.0
 texture = ExtResource("2_g3x12")
 
 [node name="SpaceBackground" type="Sprite2D" parent="."]
@@ -329,6 +349,171 @@ offset_top = 24.0
 offset_right = 448.0
 offset_bottom = 1104.0
 
+[node name="HowToPlayPanel" type="Panel" parent="UIStuff/LeftSide"]
+self_modulate = Color(0.862745, 0.862745, 0.862745, 1)
+texture_filter = 1
+offset_left = 22.0
+offset_top = 193.0
+offset_right = 222.0
+offset_bottom = 448.0
+scale = Vector2(1.85, 1.85)
+theme_override_styles/panel = SubResource("StyleBoxTexture_0fxr6")
+
+[node name="ControlsHeading" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 224.0
+offset_bottom = 52.0
+scale = Vector2(0.5, 0.5)
+text = "Controls"
+label_settings = ExtResource("12_lwaey")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 28.0
+offset_right = 197.0
+offset_bottom = 219.0
+theme_override_constants/separation = -5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("22_wvl45")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreditsHeading3" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Movement"
+label_settings = ExtResource("23_e8j7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+texture = ExtResource("24_4o2xo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreditsHeading7" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Reload"
+label_settings = ExtResource("23_e8j7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer3"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+texture = ExtResource("25_0nsd2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreditsHeading6" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Shoot"
+label_settings = ExtResource("23_e8j7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer4"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+texture = ExtResource("26_jie8y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreditsHeading5" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Boost"
+label_settings = ExtResource("23_e8j7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer7"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+texture = ExtResource("27_vutbv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreditsHeading8" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Use Bomb"
+label_settings = ExtResource("23_e8j7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer5"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+texture = ExtResource("27_34b5s")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CreditsHeading4" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Slow Time"
+label_settings = ExtResource("23_e8j7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer6"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+texture = ExtResource("28_5vt2x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreditsHeading8" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Pause Game"
+label_settings = ExtResource("23_e8j7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CreditsPanel" type="Panel" parent="UIStuff/LeftSide"]
 self_modulate = Color(0.862745, 0.862745, 0.862745, 1)
 texture_filter = 1
@@ -347,7 +532,7 @@ offset_top = 6.0
 offset_right = 224.0
 offset_bottom = 52.0
 scale = Vector2(0.5, 0.5)
-text = "CREDITS"
+text = "Credits"
 label_settings = ExtResource("12_lwaey")
 horizontal_alignment = 1
 vertical_alignment = 1
