@@ -347,7 +347,7 @@ func _bomb_function(value: int) -> void:
 		1:
 			# Do not add if bombs are already at 2.
 			if bombs > 1: 
-				AudioManager.sfx_play(bullet_warning_for_full_bomb)
+				AudioManager.sfx_play(player_bomb_obtained)
 				bomb_notification.emit(-1)
 				print("Bombs are full.")
 				return
@@ -403,6 +403,7 @@ func _player_got_hit() -> void:
 	
 	game_over_begun.emit()
 	AudioManager.sfx_play(player_got_hit_sfx.pick_random())
+	AudioManager.game_over_effects_start()
 	
 	print("Player hit! Game over!")
 
@@ -414,6 +415,7 @@ func _on_game_over_timer_timeout() -> void:
 	game_over_occured.emit()
 	AudioManager.sfx_play(explosion_sfx)
 	AudioManager.stop_level_bgm()
+	AudioManager.game_over_effects_end()
 	print("Times out, time to die!")
 
 func reset_game():
@@ -433,7 +435,7 @@ func reset_game():
 
 func _close_call_detected():
 	AudioManager.sfx_play(bullet_warning_for_full_bomb)
-	score += 1
+	score += 2
 	close_call_detected.emit()
 	
 

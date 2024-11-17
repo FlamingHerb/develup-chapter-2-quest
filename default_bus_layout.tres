@@ -7,8 +7,9 @@ cutoff_hz = 300.0
 [sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_qnxy7"]
 resource_name = "Phaser"
 
-[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_cdk1w"]
-resource_name = "Reverb"
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_inkri"]
+resource_name = "PitchShift"
+pitch_scale = 2.0
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_qi2vg"]
 resource_name = "LowPassFilter"
@@ -31,7 +32,7 @@ bus/1/effect/0/effect = SubResource("AudioEffectLowPassFilter_2d71c")
 bus/1/effect/0/enabled = false
 bus/1/effect/1/effect = SubResource("AudioEffectPhaser_qnxy7")
 bus/1/effect/1/enabled = false
-bus/1/effect/2/effect = SubResource("AudioEffectReverb_cdk1w")
+bus/1/effect/2/effect = SubResource("AudioEffectPitchShift_inkri")
 bus/1/effect/2/enabled = false
 bus/2/name = &"BGS"
 bus/2/solo = false

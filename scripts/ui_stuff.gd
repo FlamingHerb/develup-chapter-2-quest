@@ -21,6 +21,8 @@ signal restart_game()
 
 @onready var right_side_grouping = $RightSide
 
+@onready var game_border = $GamePanel
+
 var texture_rect_ref = preload("res://scenes/bomb_graphic.tscn")
 
 var next_bomb_grey_pref = preload("res://themes/next_bomb_grey.tres")
@@ -89,6 +91,7 @@ func change_next_bomb_bar(value: int) -> void:
 
 func game_over_occured() -> void:
 	restart_panel.visible = true
+	game_border.modulate = Color(1, 1, 1)
 
 func reset_game() -> void:
 	change_score(0)
@@ -144,6 +147,8 @@ func _game_over_begun_notif() -> void:
 	new_notif.notif_type = 4
 	notif_grouping.add_child(new_notif)
 	notif_grouping.move_child(new_notif, 0)
+	
+	game_border.modulate = Color(1, 0, 0)
 
 func pause_game() -> void:
 	pass
