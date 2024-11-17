@@ -56,6 +56,7 @@ shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="UINotifPanel" type="Panel"]
+self_modulate = Color(0.862745, 0.862745, 0.862745, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(200, 80)
 offset_left = 22.0
