@@ -2,6 +2,7 @@ extends Node
 
 @onready var player_ship = $PlayerBody
 @onready var general_ui = $UIStuff
+@onready var pause_screen = $UIStuff/PauseScreen
 
 var currently_playing: bool = false
 
@@ -36,11 +37,13 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("player_pause"):
 		if not currently_playing: return
 		if get_tree().paused:
+			pause_screen.visible = false
 			AudioManager.resume_game()
 			player_ship.game_got_resumed()
 			general_ui.resume_game()
 			get_tree().paused = false
 		else:
+			pause_screen.visible = true
 			AudioManager.pause_game()
 			player_ship.game_got_paused()
 			general_ui.pause_game()
