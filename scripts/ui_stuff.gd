@@ -16,8 +16,10 @@ signal restart_game()
 @onready var bomb_panel = $RightSide/BombPanel
 @onready var next_bomb_panel = $RightSide/NextBombPanel
 
-@onready var start_game_panel = $StartGame
-@onready var restart_panel = $RestartPanel
+@onready var general_panel = $GeneralPanel
+
+@onready var restart_button = $GeneralPanel/RestartButton
+@onready var new_game_button = $GeneralPanel/NewGameButton
 
 @onready var right_side_grouping = $RightSide
 
@@ -90,7 +92,8 @@ func change_next_bomb_bar(value: int) -> void:
 	overcharge_bar.value = clampi(value - 64, overcharge_bar.min_value, overcharge_bar.max_value)
 
 func game_over_occured() -> void:
-	restart_panel.visible = true
+	general_panel.visible = true
+	restart_button.visible = true
 	game_border.modulate = Color(1, 1, 1)
 
 func reset_game() -> void:
@@ -106,11 +109,17 @@ func reset_game() -> void:
 	print("Resetting UI.")
 
 func _on_restart_button_pressed() -> void:
-	restart_panel.visible = false
+	general_panel.visible = false
+	new_game_button.visible = false
+	restart_button.visible = false
+	
 	_reset_functions()
 
 func _on_new_game_button_pressed() -> void:
-	start_game_panel.visible = false
+	general_panel.visible = false
+	restart_button.visible = false
+	new_game_button.visible = false
+	
 	_reset_functions()
 
 func _reset_functions() -> void:
