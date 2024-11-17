@@ -214,7 +214,7 @@ stretch_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="SpaceshipBackground" type="TextureRect" parent="Background"]
-modulate = Color(1, 1, 1, 0.447059)
+modulate = Color(1, 1, 1, 0.705882)
 texture_filter = 1
 layout_mode = 0
 offset_left = -128.0
