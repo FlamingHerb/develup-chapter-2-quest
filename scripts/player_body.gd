@@ -432,6 +432,7 @@ func reset_game():
 	#reset_game.emit()
 
 func _close_call_detected():
+	AudioManager.sfx_play(bullet_warning_for_full_bomb)
 	score += 1
 	close_call_detected.emit()
 	
