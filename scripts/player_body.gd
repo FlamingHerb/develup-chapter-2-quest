@@ -435,11 +435,11 @@ func _on_game_over_timer_timeout() -> void:
 	collision_layer = 0
 	
 	# Make spaceship parts
-	_make_parts_gameover(space_ship_parts[0], Vector2(-150, 200))
-	_make_parts_gameover(space_ship_parts[1], Vector2(-200, 200))
-	_make_parts_gameover(space_ship_parts[2], Vector2(200, -200))
-	_make_parts_gameover(space_ship_parts[3], Vector2(-200, -200))
-	_make_parts_gameover(space_ship_parts[3], Vector2(200, -150))
+	_make_parts_gameover(space_ship_parts[0])
+	_make_parts_gameover(space_ship_parts[1])
+	_make_parts_gameover(space_ship_parts[2])
+	_make_parts_gameover(space_ship_parts[3])
+	_make_parts_gameover(space_ship_parts[3])
 	
 	await get_tree().create_timer(2).timeout
 	
@@ -476,7 +476,7 @@ func _close_call_detected():
 	close_call_detected.emit()
 	
 
-func _make_parts_gameover(wanted_texture: Texture2D, target_vel: Vector2) -> void:
+func _make_parts_gameover(wanted_texture: Texture2D) -> void:
 	var new_space_ship_part = RigidBody2D.new()
 	var space_ship_sprite = Sprite2D.new()
 	var collision_shape = CollisionShape2D.new()
@@ -486,7 +486,7 @@ func _make_parts_gameover(wanted_texture: Texture2D, target_vel: Vector2) -> voi
 	space_ship_sprite.texture = wanted_texture
 	space_ship_sprite.scale = Vector2(0.25, 0.25)
 	new_space_ship_part.position = position - Vector2(randi_range(-5, 5), randi_range(-5, 5))
-	new_space_ship_part.linear_velocity = target_vel / 0.5
+	new_space_ship_part.linear_velocity = Vector2(randi_range(-200, 200), randi_range(-200, 200)) / 0.5
 	new_space_ship_part.angular_velocity = 100
 	new_space_ship_part.gravity_scale = 0
 	new_space_ship_part.collision_layer = 0
