@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dfeuakx5qvus4" path="res://graphics/gui/bar_square_large.png" id="16_e1jax"]
 [ext_resource type="Texture2D" uid="uid://dmb3togna4wf5" path="res://graphics/gui/metalPanel.png" id="16_wdbva"]
 [ext_resource type="Texture2D" uid="uid://cl3c6ld01n4vr" path="res://graphics/gui/bar_square_green.png" id="17_j50km"]
+[ext_resource type="Shape2D" uid="uid://lco7gaj6tsim" path="res://themes/player_hitbox.tres" id="18_vd40b"]
 [ext_resource type="Texture2D" uid="uid://1si4t7momo3v" path="res://graphics/gui/metalPanel_violet.png" id="20_1aqeq"]
 [ext_resource type="Texture2D" uid="uid://b34aqerxftisp" path="res://graphics/gui/metalPanel_greygrey.png" id="20_uuyos"]
 [ext_resource type="Texture2D" uid="uid://bpg0q5imgnmvl" path="res://graphics/gui/bar_square_blue.png" id="21_ekm1d"]
@@ -118,9 +119,6 @@ animations = [{
 "name": &"default",
 "speed": 15.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2jasm"]
-radius = 4.0
 
 [sub_resource type="Curve2D" id="Curve2D_m0dgu"]
 _data = {
@@ -345,7 +343,7 @@ frame = 1
 frame_progress = 0.973377
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="PlayerBody"]
-shape = SubResource("CircleShape2D_2jasm")
+shape = ExtResource("18_vd40b")
 
 [node name="PlayerOrbit" type="Path2D" parent="PlayerBody"]
 position = Vector2(0, -0.5)
