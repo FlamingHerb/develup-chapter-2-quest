@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8mo21kj2omf6"]
+[gd_scene load_steps=11 format=3 uid="uid://b8mo21kj2omf6"]
 
 [ext_resource type="StyleBox" uid="uid://beqkaow0tv0e6" path="res://themes/ui_notif_panel.tres" id="1_i3ji4"]
 [ext_resource type="Script" path="res://scripts/ui_notif_panel.gd" id="2_uqq3d"]
 [ext_resource type="FontFile" uid="uid://dhgmmhbd8dhij" path="res://fonts/kenney_space.ttf" id="3_kf6ee"]
+[ext_resource type="FontFile" uid="uid://dcydywrlj3rlp" path="res://fonts/kenney_future.ttf" id="3_no5i8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vvgsa"]
-font = ExtResource("3_kf6ee")
-font_size = 32
+font = ExtResource("3_no5i8")
+font_size = 52
 font_color = Color(1, 0, 0, 1)
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
@@ -14,8 +15,8 @@ shadow_size = 2
 shadow_offset = Vector2(4, 2)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bgsas"]
-font = ExtResource("3_kf6ee")
-font_size = 32
+font = ExtResource("3_no5i8")
+font_size = 52
 font_color = Color(1, 1, 0, 1)
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
@@ -31,8 +32,8 @@ shadow_color = Color(0.369314, 0.0775266, 0, 1)
 shadow_offset = Vector2(0, 5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1rnkq"]
-font = ExtResource("3_kf6ee")
-font_size = 20
+font = ExtResource("3_no5i8")
+font_size = 32
 font_color = Color(1, 1, 0, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
@@ -48,11 +49,11 @@ shadow_color = Color(0.369314, 0.0775266, 0, 1)
 shadow_offset = Vector2(4, -4)
 
 [sub_resource type="LabelSettings" id="LabelSettings_sgwrh"]
-font = ExtResource("3_kf6ee")
-font_size = 18
+font = ExtResource("3_no5i8")
+font_size = 27
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
-shadow_size = 2
+shadow_size = 0
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="UINotifPanel" type="Panel"]
@@ -86,10 +87,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -98.9189
-offset_top = -31.4458
-offset_right = 301.081
-offset_bottom = 99.5542
+offset_left = -96.2162
+offset_top = -33.0674
+offset_right = 303.784
+offset_bottom = 97.9326
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
@@ -115,15 +116,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -98.9189
-offset_top = -38.2973
-offset_right = 301.081
-offset_bottom = 123.703
+offset_left = -96.7567
+offset_top = -42.0811
+offset_right = 303.243
+offset_bottom = 119.919
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 text = "BOMB
-FULLS"
+SLOT FULL"
 label_settings = SubResource("LabelSettings_bgsas")
 horizontal_alignment = 1
 vertical_alignment = 1
