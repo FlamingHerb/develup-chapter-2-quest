@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://7wu5ocmdusrj"]
+[gd_scene load_steps=79 format=3 uid="uid://7wu5ocmdusrj"]
 
 [ext_resource type="Script" path="res://the_game_main.gd" id="1_o1j5i"]
 [ext_resource type="Texture2D" uid="uid://1gledsyc1wv1" path="res://graphics/gui/darkPurple.png" id="2_2nlbx"]
@@ -8,19 +8,28 @@
 [ext_resource type="Texture2D" uid="uid://dmk702xyi77im" path="res://graphics/other_stuff/scene_2.webp" id="3_lbqnv"]
 [ext_resource type="Texture2D" uid="uid://dxrsvv6lcpd8b" path="res://graphics/spaceship_parts/playership1_red.png" id="4_b70w8"]
 [ext_resource type="Texture2D" uid="uid://ciq23gpd0p816" path="res://graphics/spaceship_parts/fire02.png" id="6_n3ii6"]
+[ext_resource type="Texture2D" uid="uid://bixw2e5tf5n3h" path="res://graphics/explosion/pixelExplosion00.png" id="6_uynr6"]
+[ext_resource type="Texture2D" uid="uid://bjdmhsteitfj8" path="res://graphics/explosion/pixelExplosion01.png" id="7_q26nf"]
 [ext_resource type="Texture2D" uid="uid://cmsk66txox132" path="res://graphics/spaceship_parts/fire03.png" id="7_tqw60"]
+[ext_resource type="Texture2D" uid="uid://d1grillokiipy" path="res://graphics/explosion/pixelExplosion02.png" id="8_ewsef"]
 [ext_resource type="Texture2D" uid="uid://dn62gsdev1ddk" path="res://graphics/spaceship_parts/fire01.png" id="9_5yifa"]
 [ext_resource type="Texture2D" uid="uid://og4op571jbrc" path="res://graphics/spaceship_parts/star1.png" id="9_gcr0f"]
+[ext_resource type="Texture2D" uid="uid://du05f5eobof4q" path="res://graphics/explosion/pixelExplosion03.png" id="9_leq2t"]
 [ext_resource type="Texture2D" uid="uid://chc1usc2wheit" path="res://graphics/spaceship_parts/fire06.png" id="10_18cmd"]
+[ext_resource type="Texture2D" uid="uid://nxahhgn8vwp5" path="res://graphics/explosion/pixelExplosion04.png" id="10_kcxt6"]
 [ext_resource type="Texture2D" uid="uid://chcifsrigdk8n" path="res://graphics/spaceship_parts/star2.png" id="10_oiyhr"]
 [ext_resource type="Texture2D" uid="uid://0mo5wxxg0w4u" path="res://graphics/spaceship_parts/fire04.png" id="10_tjxgg"]
 [ext_resource type="Texture2D" uid="uid://c7ecsudvniv8c" path="res://graphics/spaceship_parts/fire07.png" id="11_5hf15"]
 [ext_resource type="Texture2D" uid="uid://cvm0mfsh7ngdk" path="res://graphics/spaceship_parts/fire05.png" id="11_8elok"]
+[ext_resource type="Texture2D" uid="uid://cepkt1umkojd6" path="res://graphics/explosion/pixelExplosion05.png" id="11_ed7mg"]
 [ext_resource type="Texture2D" uid="uid://mluchhfl31du" path="res://graphics/spaceship_parts/star3.png" id="11_vs6nw"]
+[ext_resource type="Texture2D" uid="uid://b47qrjlmhmju0" path="res://graphics/explosion/pixelExplosion06.png" id="12_bkq2m"]
 [ext_resource type="Script" path="res://scripts/ui_stuff.gd" id="12_ekx06"]
 [ext_resource type="LabelSettings" uid="uid://bsri7cixmd4ak" path="res://themes/ui_standard.tres" id="12_lwaey"]
 [ext_resource type="StyleBox" uid="uid://dy3q2vktffieh" path="res://themes/orange_panel_corner.tres" id="12_ur6vw"]
+[ext_resource type="Texture2D" uid="uid://bulac0tvndim8" path="res://graphics/explosion/pixelExplosion07.png" id="13_grkwp"]
 [ext_resource type="LabelSettings" uid="uid://b8tuhrkmxsm73" path="res://themes/score_standard.tres" id="13_wafso"]
+[ext_resource type="Texture2D" uid="uid://by7c5qnqshxet" path="res://graphics/explosion/pixelExplosion08.png" id="14_nauvn"]
 [ext_resource type="StyleBox" uid="uid://b267xrlxbunc7" path="res://themes/green_panel_corner.tres" id="15_qlfci"]
 [ext_resource type="Texture2D" uid="uid://dfeuakx5qvus4" path="res://graphics/gui/bar_square_large.png" id="16_e1jax"]
 [ext_resource type="Texture2D" uid="uid://dmb3togna4wf5" path="res://graphics/gui/metalPanel.png" id="16_wdbva"]
@@ -50,6 +59,41 @@
 [ext_resource type="LabelSettings" uid="uid://36kmd007ibkt" path="res://themes/help_text.tres" id="47_tr5jv"]
 [ext_resource type="Texture2D" uid="uid://phf0nxmw08un" path="res://graphics/other_stuff/help_2.png" id="48_qj7fs"]
 [ext_resource type="Texture2D" uid="uid://b1k05igy50xcj" path="res://graphics/other_stuff/help_3.png" id="49_8yrwb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0bcce"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("6_uynr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_q26nf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ewsef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_leq2t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kcxt6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ed7mg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bkq2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_grkwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_nauvn")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0cmf"]
 bounce = 1.0
@@ -179,6 +223,80 @@ font_size = 28
 font_color = Color(0, 0, 0, 1)
 outline_size = 8
 
+[sub_resource type="Animation" id="Animation_7is0q"]
+resource_name = "explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpaceBackground:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Color(5, 5, 5, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"default", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosion:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_x0yim"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpaceBackground:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6apx2"]
+_data = {
+"RESET": SubResource("Animation_x0yim"),
+"explosion": SubResource("Animation_7is0q")
+}
+
 [node name="TheGameMain" type="Node"]
 process_mode = 3
 script = ExtResource("1_o1j5i")
@@ -228,6 +346,13 @@ position = Vector2(960, 540)
 scale = Vector2(4, 4)
 texture = ExtResource("2_2nlbx")
 metadata/_edit_lock_ = true
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(960, 540)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_0bcce")
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 visible = false
@@ -458,12 +583,14 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer"]
 self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("22_wvl45")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="CreditsHeading3" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -478,11 +605,13 @@ layout_mode = 2
 
 [node name="TextureRect5" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer2"]
 self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 texture = ExtResource("24_4o2xo")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="CreditsHeading7" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -497,11 +626,13 @@ layout_mode = 2
 
 [node name="TextureRect4" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer3"]
 self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 texture = ExtResource("25_0nsd2")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="CreditsHeading6" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -516,11 +647,13 @@ layout_mode = 2
 
 [node name="TextureRect3" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer4"]
 self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 texture = ExtResource("26_jie8y")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="CreditsHeading5" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
@@ -535,11 +668,13 @@ layout_mode = 2
 
 [node name="TextureRect6" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer7"]
 self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 texture = ExtResource("27_vutbv")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="CreditsHeading8" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer7"]
 layout_mode = 2
@@ -554,11 +689,13 @@ layout_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer5"]
 self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 texture = ExtResource("27_34b5s")
 expand_mode = 3
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="CreditsHeading4" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
@@ -573,11 +710,13 @@ layout_mode = 2
 
 [node name="TextureRect6" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer6"]
 self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 texture = ExtResource("28_5vt2x")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="CreditsHeading8" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer6"]
 layout_mode = 2
@@ -592,11 +731,13 @@ layout_mode = 2
 
 [node name="TextureRect6" type="TextureRect" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer8"]
 self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 texture = ExtResource("30_uh2jl")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="CreditsHeading8" type="Label" parent="UIStuff/LeftSide/HowToPlayPanel/VBoxContainer/HBoxContainer8"]
 layout_mode = 2
@@ -1177,6 +1318,11 @@ scale = Vector2(1.5, 1.5)
 text = "Press Esc to Continue"
 label_settings = SubResource("LabelSettings_6xvl4")
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6apx2")
+}
 
 [connection signal="timeout" from="PlayerBody/HoldDownTimer" to="PlayerBody" method="_orbit_spawn_after_timeout"]
 [connection signal="timeout" from="PlayerBody/GameOverTimer" to="PlayerBody" method="_on_game_over_timer_timeout"]

@@ -26,6 +26,7 @@ var meteor_bounce_sfx = [
 
 @onready var meteor_sprite_ref = $Sprite
 @onready var speed_sprite = $SpeedSprite
+@onready var collision_sprite = $CollisionSprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,9 +43,18 @@ func _physics_process(delta: float) -> void:
 		AudioManager.sfx_play(meteor_bounce_sfx.pick_random())
 		
 		if collision_info.get_collider().name == player_reference.name:
+			# Player got hit
+			velocity = Vector2.ZERO
 			player_hit.emit()
+			
 			if game_over_on == true: queue_free()
-		
+			
+			#collision_layer = 0
+			#collision_sprite.visible = true
+			#await get_tree().create_timer(1).timeout
+			#queue_free()
+				#
+				
 		# Decide whether it will bounce towards player or not.
 		if not randf_range(0, 1) > 0.69: 
 			velocity = velocity.bounce(collision_info.get_normal())

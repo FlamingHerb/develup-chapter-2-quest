@@ -32,6 +32,8 @@ signal game_over_begun()
 @onready var player_orbit = $PlayerOrbit
 @onready var asteroid_group = $"../AsteroidGroup"
 
+@onready var animation_player = $"../AnimationPlayer"
+
 @onready var reloading_color = Color(0.706, 0.396, 0.612)
 @onready var full_reload_color = Color8(243, 170, 44)
 
@@ -216,6 +218,7 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("player_bomb"):
 		if bombs != 0:
 			bombs_detonated += 1
+			animation_player.play("explosion")
 			_bomb_function(-1)
 		else:
 			AudioManager.sfx_play(bomb_error)
