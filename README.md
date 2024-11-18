@@ -1,5 +1,5 @@
 # 🚀 Lost Voyager: Asteroid Destroyer
-Inspired by a rather acquainted from HunsterVerse, **Lost Voyager: Asteroid Destroyer** is a retro-styled reverse shoot-em-up game where _you_ create your own obstacles—literally! Become the master of dodging your own meteor-creations (no pun intended), boosting your way out or slowing down time sexy-style.  And maybe brag to your friends that you're just a bit more better than them in Touhou (this is not a valid claim).
+Inspired by a rather acquainted game from HunsterVerse, **Lost Voyager: Asteroid Destroyer** is a retro-styled reverse shoot-em-up game where _you_ create your own obstacles—literally! Become the master of dodging your own meteor-creations (no pun intended), boosting your way out or slowing down time sexy-style.  And maybe brag to your friends that you're just a bit more better than them in Touhou (this is not a valid claim).
 
 This game is made for DevelUP's application process—specifically its Chapter 2 Main Quest.
 
@@ -10,6 +10,7 @@ This game is made for DevelUP's application process—specifically its Chapter 2
 - Drops/Resources (Bomb Mechanic, Boost/Slowdown)
 - Spawning/Respawning (Meteors)
 - Overworld Hazards/Obstacles (Meteors)
+- And possibly a lot more since I have no 
 
 ## 🎮 Download
 [Github Release](https://github.com/FlamingHerb/develup-chapter-2-quest/releases)
