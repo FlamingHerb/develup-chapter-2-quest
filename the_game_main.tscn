@@ -357,7 +357,7 @@ wait_time = 0.15
 autostart = true
 
 [node name="GameOverTimer" type="Timer" parent="PlayerBody"]
-wait_time = 7.0
+wait_time = 8.0
 one_shot = true
 
 [node name="AsteroidGroup" type="CanvasGroup" parent="."]
@@ -969,7 +969,7 @@ offset_bottom = 174.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
-text = "The game where you shoot your own problems."
+text = "The game where you dodge your own problems."
 label_settings = SubResource("LabelSettings_8yxnc")
 horizontal_alignment = 1
 vertical_alignment = 1

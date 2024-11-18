@@ -120,6 +120,8 @@ var grabbing_meteors_sfx = [
 	preload("res://audio/sfx/player_ship/sfx_sound_neutral6.wav")
 ]
 
+var explosion_countdown_sfx = preload("res://audio/sfx/player_ship/countdown.ogg")
+
 var explosion_sfx = preload("res://audio/sfx/player_ship/sfx_exp_long4.wav")
 
 const SPEED = 150.0
@@ -133,7 +135,7 @@ func _ready() -> void:
 	# Arm the timer
 	hold_down_timer.paused = true
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if stamina <= 0:
@@ -407,6 +409,8 @@ func _player_got_hit() -> void:
 	AudioManager.game_over_effects_start()
 	
 	player_hitbox.shape.radius = 8
+	
+	AudioManager.sfx_play(explosion_countdown_sfx)
 	
 	print("Player hit! Game over!")
 
