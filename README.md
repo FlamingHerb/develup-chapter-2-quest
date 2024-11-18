@@ -10,7 +10,7 @@ This game is made for DevelUP's application process—specifically its Chapter 2
 - Drops/Resources (Bomb Mechanic, Boost/Slowdown)
 - Spawning/Respawning (Meteors)
 - Overworld Hazards/Obstacles (Meteors)
-- And possibly a lot more since I have no 
+- And possibly a lot more since I have no idea how many more mechanics I added in this game.
 
 ## 🎮 Download
 [Github Release](https://github.com/FlamingHerb/develup-chapter-2-quest/releases)
