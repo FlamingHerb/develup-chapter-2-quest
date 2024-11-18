@@ -13,7 +13,9 @@ This game is made for DevelUP's application process—specifically its Chapter 2
 - And possibly a lot more since I have no idea how many more mechanics I added in this game.
 
 ## 🎮 Download
-[Github Release](https://github.com/FlamingHerb/develup-chapter-2-quest/releases)
+**Release Builds:** [Github Release](https://github.com/FlamingHerb/develup-chapter-2-quest/releases)
+
+**Web Browser Build:** [Github Pages Link](https://flamingherb.github.io/develup-chapter-2-quest/) 
 
 ## Disclaimer
 All rights to the original work belong to their respective owners. This game is created for non-commercial purposes and is not intended to infringe on any copyrights.
