@@ -23,7 +23,7 @@ func _ready() -> void:
 			game_over_sequence.visible = true
 	
 	if game_over_sequence.visible:
-		timer.start(7.0)
+		timer.start(8.0)
 	else:
 		timer.start()
 

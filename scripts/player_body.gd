@@ -160,7 +160,7 @@ func _physics_process(_delta: float) -> void:
 		elif current_state == States.SLOWDOWN:
 			actual_speed *= 0.5
 		if current_state == States.GAMEOVER:
-			actual_speed *= 0.5
+			actual_speed *= 0.75
 		
 		velocity = input_direction.normalized() * actual_speed
 		if not current_state == States.GAMEOVER: _shoot_item_loop()
