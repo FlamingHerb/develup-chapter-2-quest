@@ -14,6 +14,9 @@ signal change_bomb_value_gui(value: int)
 # Change next bomb GUI
 signal change_next_bomb_gui(value: int)
 
+# Sending high score
+signal send_high_score(value: int)
+
 # Tell entire game to reset.
 # signal reset_game()
 
@@ -442,12 +445,17 @@ func _on_game_over_timer_timeout() -> void:
 	_make_parts_gameover(space_ship_parts[3], Vector2(250, 0))
 	_make_parts_gameover(space_ship_parts[3], Vector2(-250, 0))
 	
+	# Send high score.
+	send_high_score.emit(score)
+	
 	await get_tree().create_timer(2).timeout
 	
 	get_tree().call_group("Meteor", "queue_free")
 	
 	
 	game_over_occured.emit()
+	
+	
 	
 	print("Times out, time to die!")
 

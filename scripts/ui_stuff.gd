@@ -25,6 +25,8 @@ signal restart_game()
 
 @onready var game_border = $GamePanel
 
+@onready var high_score_label = $LeftSide/HiScoreBox/HiScore
+
 var texture_rect_ref = preload("res://scenes/bomb_graphic.tscn")
 
 var next_bomb_grey_pref = preload("res://themes/next_bomb_grey.tres")
@@ -158,6 +160,9 @@ func _game_over_begun_notif() -> void:
 	notif_grouping.move_child(new_notif, 0)
 	
 	game_border.modulate = Color(1, 0, 0)
+
+func change_high_score(score: int) -> void:
+	high_score_label.text = "%0*d" % [7, score]
 
 func pause_game() -> void:
 	pass
