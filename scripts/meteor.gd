@@ -47,7 +47,9 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 			player_hit.emit()
 			
-			if game_over_on == true: queue_free()
+			if game_over_on == true:
+				can_spawn_meteor = false
+				queue_free()
 			
 			#collision_layer = 0
 			#collision_sprite.visible = true
